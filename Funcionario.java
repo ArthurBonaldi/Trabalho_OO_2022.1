@@ -43,14 +43,6 @@ public class Funcionario {
         return this.idade;
     }
     
-    private void setSenha(String senha){
-        if(senha.length() > 3){
-            this.senha = senha;
-        } else{
-            System.out.println("Senha inválida!");
-        }
-    }
-    
     public void setIdade(int idade){
         if(idade >=18 && idade <= 99){
             this.idade = idade;
@@ -59,6 +51,13 @@ public class Funcionario {
         }
     }
     
+    private void setSenha(String senha){
+        if(senha.length() > 3){
+            this.senha = senha;
+        } else{
+            System.out.println("Senha inválida!");
+        }
+    }
     private void setAsAdmin(){
         this.isAdmin = true;
     }
