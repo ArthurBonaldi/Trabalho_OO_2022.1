@@ -17,16 +17,13 @@ public class Usuario  {
     private String email;
     private String senha;
     private String cargo;
+    private boolean isLogged;
 
    
 
     public Usuario(){
        numUsers++;
-       this.nome = "";
-       this.senha ="";
-       this.email ="";
-       this.idUser =0; 
-       this.cargo ="";
+       this.isLogged = false;
       
     }
     public int getId() {
@@ -81,6 +78,14 @@ public class Usuario  {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    public boolean isIsLogged() {
+        return isLogged;
+    }
+
+    public void setIsLogged(boolean isLogged) {
+        this.isLogged = isLogged;
     }
    
 }
