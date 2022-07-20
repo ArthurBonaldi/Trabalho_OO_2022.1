@@ -16,6 +16,9 @@ public class Usuario  {
     private String nome;
     private String email;
     private String senha;
+    private String cargo;
+
+   
 
     public Usuario(){
        numUsers++;
@@ -23,6 +26,7 @@ public class Usuario  {
        this.senha ="";
        this.email ="";
        this.idUser =0; 
+       this.cargo ="";
       
     }
     public int getId() {
@@ -70,6 +74,13 @@ public class Usuario  {
     
     public void setIdUser(String idUser) {
         this.idUser = hashCode();
+    }
+     public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
    
 }
