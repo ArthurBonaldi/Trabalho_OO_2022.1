@@ -13,5 +13,6 @@ public class TrabalhoOO {
     public static void main(String args[]) {
             TelaLogin login = new TelaLogin();
             login.montaTela();
+            System.out.println("ABCDE");
     }
 }
