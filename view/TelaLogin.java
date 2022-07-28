@@ -45,8 +45,14 @@ public class TelaLogin extends JFrame implements InitComponents {
             manager.montaTela();
             this.dispose();
         }
-        else {
-            JOptionPane.showMessageDialog(null, "Usuario e/ou senha Invalidos");
+        else if(tfUsuario.getText().equals("admin2") && tfSenha.getText().equals("12345")){
+           JOptionPane.showMessageDialog(null, "Seja Bem-vindo(a)");
+            TelaHomeCashier cashier = new TelaHomeCashier();
+            cashier.montaTela();
+            this.dispose();
+        }
+        else{
+             JOptionPane.showMessageDialog(null, "Usuario e/ou senha Invalidos");
         }
     }
 
