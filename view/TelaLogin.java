@@ -28,6 +28,7 @@ public class TelaLogin extends JFrame implements InitComponents {
     public TelaLogin() {
         initComponents();
     }
+    
     @Override
     public void montaTela(){
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -36,6 +37,7 @@ public class TelaLogin extends JFrame implements InitComponents {
             }
         });
     }
+    
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -51,8 +53,14 @@ public class TelaLogin extends JFrame implements InitComponents {
             cashier.montaTela();
             this.dispose();
         }
+        else if(tfUsuario.getText().equals("admin3") && tfSenha.getText().equals("123")){
+             JOptionPane.showMessageDialog(null, "Seja Bem-vindo(a)");
+            TelaHomeBaker baker = new TelaHomeBaker();
+            baker.montaTela();
+            this.dispose();
+        }
         else{
-             JOptionPane.showMessageDialog(null, "Usuario e/ou senha Invalidos");
+            JOptionPane.showMessageDialog(null, "Usuario e/ou senha Invalidos");
         }
     }
 

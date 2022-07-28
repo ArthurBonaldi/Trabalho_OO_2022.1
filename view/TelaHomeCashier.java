@@ -139,7 +139,7 @@ public class TelaHomeCashier extends JFrame implements InitComponents {
     public void montaTela() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaHome1().setVisible(true);
+                new TelaHomeCashier().setVisible(true);
             }
         });
     }
