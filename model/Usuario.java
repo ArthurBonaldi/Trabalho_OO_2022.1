@@ -10,7 +10,7 @@ package ufjf.dcc025.trabalhooo.model;
  *
  * @author salesmiguelz
  */
-public abstract class Usuario  {
+public class Usuario  {
     private static int numUsers; 
     private int idUser;
     private String nome;
@@ -22,8 +22,6 @@ public abstract class Usuario  {
    
 
     public Usuario(){
-       numUsers++;
-       this.isLogged = false;
       
     }
     public int getId() {

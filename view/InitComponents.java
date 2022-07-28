@@ -8,10 +8,6 @@ package ufjf.dcc025.trabalhooo.view;
  *
  * @author arthu
  */
-public class TrabalhoOO {
-
-    public static void main(String args[]) {
-            TelaLogin login = new TelaLogin();
-            login.montaTela();
-    }
+public interface InitComponents {
+    public void initComponents();
 }
