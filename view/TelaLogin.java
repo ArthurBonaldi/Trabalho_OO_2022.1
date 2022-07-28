@@ -28,6 +28,7 @@ public class TelaLogin extends JFrame implements InitComponents {
     public TelaLogin() {
         initComponents();
     }
+    @Override
     public void montaTela(){
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -39,13 +40,19 @@ public class TelaLogin extends JFrame implements InitComponents {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (tfUsuario.getText().equals("admin") && tfSenha.getText().equals("1234")) {
-            JOptionPane.showMessageDialog(null, "Saudades pitico");
+            JOptionPane.showMessageDialog(null, "Seja Bem-vindo(a)");
+            TelaHomeManager manager = new TelaHomeManager();
+            manager.montaTela();
             this.dispose();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Usuario e/ou senha Invalidos");
         }
     }
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if (evt.getSource() == exitButton) {
+            JOptionPane.showMessageDialog(null, "Tenha um dia abençoado");
             System.exit(0);
         }
     }

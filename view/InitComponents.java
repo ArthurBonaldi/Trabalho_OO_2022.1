@@ -10,4 +10,5 @@ package ufjf.dcc025.trabalhooo.view;
  */
 public interface InitComponents {
     public void initComponents();
+    public void montaTela();
 }
