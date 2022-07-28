@@ -10,7 +10,7 @@ package ufjf.dcc025.trabalhooo.model;
  *
  * @author salesmiguelz
  */
-public class Usuario  {
+public abstract class Usuario  {
     private static int numUsers; 
     private int idUser;
     private String nome;
