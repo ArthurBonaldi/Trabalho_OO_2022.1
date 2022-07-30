@@ -4,6 +4,9 @@
  */
 package ufjf.dcc025.trabalhooo.view;
 
+import ufjf.dcc025.trabalhooo.controller.UsuarioController;
+import ufjf.dcc025.trabalhooo.model.Usuario;
+
 /**
  *
  * @author arthu
@@ -11,6 +14,8 @@ package ufjf.dcc025.trabalhooo.view;
 public class TrabalhoOO {
 
     public static void main(String args[]) {
+        UsuarioController add = new UsuarioController();
+        add.create("Arthur", "arthur.bonaldi@codejr.com.br", "123456789", "Gerente");
           TelaLogin login = new TelaLogin();
           login.montaTela();
     }

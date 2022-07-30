@@ -4,7 +4,13 @@
  */
 package ufjf.dcc025.trabalhooo.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
+import ufjf.dcc025.trabalhooo.controller.ProdutoController;
+import ufjf.dcc025.trabalhooo.model.Produto;
 
 /**
  *
@@ -44,7 +50,14 @@ public class TelacCrudProduto extends JFrame  {
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    }               
+    }   
+    
+    private void jButton1ActionPerformed(ActionEvent evt){
+        ProdutoController newProduct = new ProdutoController();
+        newProduct.create(jTextField1.getText(),jTextField3.getText(),jTextField1.getText() );
+        List<Produto> produtos = new ArrayList<>();
+        
+    }
      private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -95,6 +108,11 @@ public class TelacCrudProduto extends JFrame  {
 
         jButton1.setBackground(new java.awt.Color(234, 220, 166));
         jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               jButton1ActionPerformed(e);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(234, 220, 166));
         jButton2.setText("Editar");

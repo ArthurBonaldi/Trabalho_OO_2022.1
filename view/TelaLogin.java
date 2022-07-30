@@ -6,6 +6,9 @@ package ufjf.dcc025.trabalhooo.view;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import ufjf.dcc025.trabalhooo.controller.LoginController;
+import ufjf.dcc025.trabalhooo.model.Usuario;
 
 /**
  *
@@ -29,16 +32,43 @@ public class TelaLogin extends JFrame {
     }
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {
-       
+        int input = JOptionPane.showConfirmDialog(null, "Saindo...", "Deseja mesmo sair?", JOptionPane.YES_NO_CANCEL_OPTION);
+        if(input ==0){
+            this.dispose();
+            System.exit(0);
+        }
+        else{
+            
+        }
     }
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        TelaHomeManager manager = new TelaHomeManager();
-        this.dispose();
-        manager.montaTela();
+        LoginController login = new LoginController();
+        if(login.logar(tfUser.getText(), (new String(tfPassword.getPassword())))){
+            Usuario user = Usuario.getLoggedUser();
+            if(user.getCargo().equals("Gerente")){
+                TelaHomeManager manager = new TelaHomeManager();
+                this.dispose();
+                manager.montaTela();
+            }
+            else if(user.getCargo().equals("Caixa")){
+                TelaHomeCashier cashier = new TelaHomeCashier();
+                this.dispose();
+                cashier.montaTela();
+            }
+            else if(user.getCargo().equals("Padeiro")){
+                TelaHomeBaker baker = new TelaHomeBaker();
+                this.dispose();
+                baker.montaTela();
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Usuário/Senha Inválida");
+        }
+        
     }  
 
     public void initComponents() {
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new JPanel();
         userLabel = new javax.swing.JLabel();
         subtitleLabel = new javax.swing.JLabel();
         tfUser = new javax.swing.JTextField();

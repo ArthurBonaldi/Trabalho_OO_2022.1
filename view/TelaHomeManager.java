@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import ufjf.dcc025.trabalhooo.model.Usuario;
 
 /**
  *
@@ -76,7 +77,7 @@ public class TelaHomeManager extends JFrame {
     // End of variables declaration        
 
     public void initComponents() {
-
+        
         jPanel1 = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         subtitleLabel = new javax.swing.JLabel();
@@ -95,7 +96,7 @@ public class TelaHomeManager extends JFrame {
 
         titleLabel.setBackground(new java.awt.Color(0, 0, 0));
         titleLabel.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
-        titleLabel.setText("      Bem-Vindo(a) Fulano(a)");
+        titleLabel.setText("      Bem-Vinde " + Usuario.getLoggedUser().getNome());
 
         subtitleLabel.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         subtitleLabel.setText("         Selecione uma categoria:");

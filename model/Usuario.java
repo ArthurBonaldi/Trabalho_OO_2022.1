@@ -12,7 +12,7 @@ import java.util.List;
  * @author salesmiguelz
  */
 public class Usuario  {
-    private static int currentId; 
+    private static int currentId =1; 
     private int userId;
     private String nome;
     private String cpf;
@@ -83,15 +83,6 @@ public class Usuario  {
 
     public static List<Usuario> getUsuarios(){
         return usuarios;
-    }
-
-
-    public int getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getCpf() {

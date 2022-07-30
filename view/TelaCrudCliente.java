@@ -100,6 +100,7 @@ public class TelaCrudCliente extends JFrame {
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel4.setText("Cadastro de clientes");
+        
 
         jLabel5.setText("Data de Nascimento:");
 
