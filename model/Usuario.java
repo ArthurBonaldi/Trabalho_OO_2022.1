@@ -4,7 +4,8 @@
  */
 package ufjf.dcc025.trabalhooo.model;
 
-
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,7 +19,7 @@ public class Usuario  {
     private String senha;
     private String cargo;
     private boolean isLogged;
-
+    private static List<Usuario> usuarios = new ArrayList<>();
    
 
     public Usuario(){
@@ -86,5 +87,8 @@ public class Usuario  {
     public void setIsLogged(boolean isLogged) {
         this.isLogged = isLogged;
     }
-   
+
+    public static List<Usuario> getUsuarios(){
+        return usuarios;
+    }
 }
