@@ -33,7 +33,7 @@ public class Maquina {
 
     public void setPeso(String peso) throws NumeroInvalido{//
         String aux = peso.replaceAll(".",",");
-        if (!aux.replaceAll("," , "").toLowerCase().matches("[0-9]*")) {
+        if (!aux.replaceAll("," , "").matches("[0-9]*")) {
             throw new NumeroInvalido();
         }
         else

@@ -42,7 +42,7 @@ public class Produto {
 
     public void setPreco(String preco) throws NumeroInvalido{
         String aux = preco.replaceAll(".",",");
-        if (!aux.replaceAll("," , "").toLowerCase().matches("[0-9]*")) {
+        if (!aux.replaceAll("," , "").matches("[0-9]*")) {
             throw new NumeroInvalido();
         }
         else
