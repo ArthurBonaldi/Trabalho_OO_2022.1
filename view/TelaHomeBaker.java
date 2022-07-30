@@ -10,7 +10,7 @@ import javax.swing.JFrame;
  *
  * @author arthu
  */
-public class TelaHomeBaker extends JFrame implements InitComponents {
+public class TelaHomeBaker extends JFrame {
 
     private javax.swing.JButton exitButton;
     private javax.swing.JPanel jPanel1;
@@ -18,15 +18,15 @@ public class TelaHomeBaker extends JFrame implements InitComponents {
     private javax.swing.JButton productsButton;
     private javax.swing.JLabel subtitleLabel;
     private javax.swing.JLabel titleLabel;
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }      
+    }
 
     public TelaHomeBaker() {
         initComponents();
     }
-    
-    @Override
+
     public void initComponents() {
         jPanel1 = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
@@ -37,17 +37,25 @@ public class TelaHomeBaker extends JFrame implements InitComponents {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(242, 208, 167));
+        jPanel1.setBackground(new java.awt.Color(226, 194, 117));
 
         titleLabel.setBackground(new java.awt.Color(0, 0, 0));
+        titleLabel.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         titleLabel.setText("      Bem-Vindo(a) Fulano(a)");
 
+        subtitleLabel.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         subtitleLabel.setText("         Selecione uma categoria:");
 
+        machineButton.setBackground(new java.awt.Color(234, 220, 166));
+        machineButton.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         machineButton.setText("Máquinas");
 
+        productsButton.setBackground(new java.awt.Color(234, 220, 166));
+        productsButton.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         productsButton.setText("Produtos");
 
+        exitButton.setBackground(new java.awt.Color(234, 220, 166));
+        exitButton.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         exitButton.setText("Sair");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,18 +70,19 @@ public class TelaHomeBaker extends JFrame implements InitComponents {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(141, 141, 141)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(subtitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(111, 111, 111)
                                                 .addComponent(exitButton))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(121, 121, 121)
-                                                .addComponent(productsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(machineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(subtitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addComponent(productsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(machineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(0, 126, Short.MAX_VALUE)))
                                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -88,7 +97,7 @@ public class TelaHomeBaker extends JFrame implements InitComponents {
                                                 .addComponent(exitButton)))
                                 .addGap(18, 18, 18)
                                 .addComponent(subtitleLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(machineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(productsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -109,7 +118,6 @@ public class TelaHomeBaker extends JFrame implements InitComponents {
         pack();
     }
 
-    @Override
     public void montaTela() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
