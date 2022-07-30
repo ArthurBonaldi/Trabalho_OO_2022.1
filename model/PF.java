@@ -5,6 +5,11 @@
 package ufjf.dcc025.trabalhooo.model;
 
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 
 /**
  *
@@ -13,7 +18,7 @@ package ufjf.dcc025.trabalhooo.model;
 public class PF  extends Cliente{
 
     private String cpf ;
-    private String date;
+    private Date date;
     
     
     public PF(){
@@ -31,14 +36,20 @@ public class PF  extends Cliente{
             throw new CPFInvalido();
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
-    } //Fazer tratamento!
-
-    public void setDate(String date) {
-        this.date = date;
     }
-    
+
+    public void setDate (Date date) throws DataInvalida {
+        LocalDate dataRecebida = date.toInstant().atZone( ZoneId.systemDefault() ).toLocalDate();
+        final LocalDate dataAtual = LocalDate.now();
+        final Period periodo = Period.between(dataRecebida, dataAtual);
+
+        if (periodo.getYears() > 18)
+            this.date = date;
+        else
+            throw new DataInvalida();
+    }
  
     
    

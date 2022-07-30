@@ -32,7 +32,7 @@ public class Cliente  {
             this.nome = nome;
     }
 
-    public String getEmeail() {
+    public String getEmail() {
         return email;
     }
 
