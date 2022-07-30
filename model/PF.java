@@ -5,6 +5,9 @@
 package ufjf.dcc025.trabalhooo.model;
 
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 /**
  *
@@ -13,7 +16,7 @@ package ufjf.dcc025.trabalhooo.model;
 public class PF  extends Cliente{
 
     private String cpf ;
-    private String date;
+    private Date date;
     
     
     public PF(){
@@ -31,12 +34,34 @@ public class PF  extends Cliente{
             throw new CPFInvalido();
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
-    } //Fazer tratamento!
+    }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDate (Date date) throws DataInvalida {
+        int idade;
+
+        Date dataAtual = new Date(System.currentTimeMillis());
+
+        LocalDate dataRecebida = LocalDate.parse((CharSequence) date);
+        LocalDate dataAtualizada = LocalDate.parse((CharSequence) dataAtual);
+
+        int ano = dataRecebida.getYear();
+        int mes = dataRecebida.getMonthValue();
+        int dia = dataRecebida.getDayOfMonth();
+
+        int anoatual = dataAtualizada.getYear();
+        int mesatual = dataAtualizada.getMonthValue();
+        int diaatual = dataAtualizada.getDayOfMonth();
+
+        int totalIdade = 365 * anoatual + 30 * mesatual + diaatual - 365 * ano - 30 * mes - dia;
+
+        idade = totalIdade / 365;
+
+        if(idade > 18)
+            this.date = date;
+        else
+            throw new DataInvalida();
     }
     
  
