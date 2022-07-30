@@ -13,8 +13,9 @@ import java.util.List;
  */
 public class Usuario  {
     private static int numUsers; 
-    private int idUser;
+    private int userId;
     private String nome;
+    private String cpf;
     private String email;
     private String senha;
     private String cargo;
@@ -26,15 +27,14 @@ public class Usuario  {
       
     }
     public int getId() {
-        return idUser;
+        return userId;
     } 
- 
 
     public String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) throws Exception{
+    public void setSenha(String senha) throws SenhaInvalida{
        if(senha.length() >= 6 && senha.length() <= 12 ){
            this.senha = senha;
        }
@@ -43,6 +43,9 @@ public class Usuario  {
        }
     }
    
+    public void setId(int id){
+        this.userId = id;
+    }
     
     public String getNome(){
         return this.nome;
@@ -69,9 +72,6 @@ public class Usuario  {
         }
     }
     
-    public void setIdUser(String idUser) {
-        this.idUser = hashCode();
-    }
      public String getCargo() {
         return cargo;
     }
@@ -90,5 +90,50 @@ public class Usuario  {
 
     public static List<Usuario> getUsuarios(){
         return usuarios;
+    }
+
+    public static void addUser(Usuario u){
+        u.setId(numUsers);
+        usuarios.add(u);
+        numUsers++;
+    }
+
+    public int getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getCpf() {
+        return this.cpf;
+    }
+
+    public void setCpf(String cpf) throws CPFInvalido{
+        this.cpf = cpf;
+    }
+
+    public boolean getIsLogged() {
+        return this.isLogged;
+    }
+
+    public static Usuario getUser(int id){
+        Usuario usuario = new Usuario();
+        for(Usuario u: usuarios){
+            if(u.getId() == id){
+                return u;
+            }
+        }
+
+        return usuario;
+    }
+
+    public static void deleteUser(int id){
+        for(Usuario u: usuarios){
+            if(u.getId() == id){
+                usuarios.remove(u);
+            }
+        }
     }
 }
