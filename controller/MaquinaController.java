@@ -1,5 +1,6 @@
 package ufjf.dcc025.trabalhooo.controller;
 
+import java.text.ParseException;
 import java.util.Date;
 
 import ufjf.dcc025.trabalhooo.model.Maquina;
@@ -18,6 +19,8 @@ public class MaquinaController {
             System.out.println(Nm.getMessage());
         }catch (NumeroInvalido Num) {
             System.out.println(Num.getMessage());
+        }catch (Exception Dt){
+            System.out.println("Data Invalida!");
         }
     }
 
@@ -31,6 +34,8 @@ public class MaquinaController {
             System.out.println(Nm.getMessage());
         }catch (NumeroInvalido Num) {
             System.out.println(Num.getMessage());
+        }catch (Exception Dt){
+            System.out.println("Data Invalida!");
         }
     }
 

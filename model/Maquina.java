@@ -31,7 +31,7 @@ public class Maquina {
         return aDouble;
     }
 
-    public void setPeso(String peso) throws NumeroInvalido{//
+    public void setPeso(String peso) throws NumeroInvalido{
         String aux = peso.replaceAll(".",",");
         if (!aux.replaceAll("," , "").matches("[0-9]*")) {
             throw new NumeroInvalido();
@@ -44,7 +44,8 @@ public class Maquina {
         return this.dataDeManutencao;
     }
 
-    public void setDataDeManutencao(Date dataDeManutencao) {
+    public void setDataDeManutencao(Date dataDeManutencao){
+
         this.dataDeManutencao = dataDeManutencao;
     }
 
