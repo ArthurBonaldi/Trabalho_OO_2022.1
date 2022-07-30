@@ -11,7 +11,7 @@ package ufjf.dcc025.trabalhooo.view;
 public class TrabalhoOO {
 
     public static void main(String args[]) {
-          TelaHomeBaker login = new TelaHomeBaker();
+          TelacCrudProduto login = new TelacCrudProduto();
           login.montaTela();
     }
 }
