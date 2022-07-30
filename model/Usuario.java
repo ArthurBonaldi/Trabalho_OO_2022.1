@@ -12,7 +12,7 @@ import java.util.List;
  * @author salesmiguelz
  */
 public class Usuario  {
-    private static int numUsers; 
+    private static int currentId; 
     private int userId;
     private String nome;
     private String cpf;
@@ -92,11 +92,6 @@ public class Usuario  {
         return usuarios;
     }
 
-    public static void addUser(Usuario u){
-        u.setId(numUsers);
-        usuarios.add(u);
-        numUsers++;
-    }
 
     public int getUserId() {
         return this.userId;
@@ -117,12 +112,17 @@ public class Usuario  {
     public boolean getIsLogged() {
         return this.isLogged;
     }
-
+    public static void addUser(Usuario u){
+        u.setId(currentId);
+        usuarios.add(u);
+        currentId++;
+    }
+    
     public static Usuario getUser(int id){
         Usuario usuario = new Usuario();
         for(Usuario u: usuarios){
             if(u.getId() == id){
-                return u;
+                usuario = u;
             }
         }
 
@@ -130,10 +130,6 @@ public class Usuario  {
     }
 
     public static void deleteUser(int id){
-        for(Usuario u: usuarios){
-            if(u.getId() == id){
-                usuarios.remove(u);
-            }
-        }
+        usuarios.remove(getUser(id));
     }
 }
