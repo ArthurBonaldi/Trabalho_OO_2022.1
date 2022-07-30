@@ -38,7 +38,7 @@ public class Usuario  {
            this.senha = senha;
        }
        else{
-           throw new Exception("Senha Invalida");
+           throw new Exception("Senha Invalida!");
        }
     }
    
@@ -46,24 +46,25 @@ public class Usuario  {
     public String getNome(){
         return this.nome;
     }
-    
-    public void setNome(String nome){
-        if(nome.length() > 3){
-            this.nome = nome;
-        } else{
-            System.out.println("O nome do cliente precisa ter mais que 3 caracteres.");
+
+    public void setNome(String nome) throws NomeInvalido{ //não pode conter numeros e tem q ser maior q 2
+        String aux=nome;
+        if (!aux.replaceAll(" ", "").toLowerCase().matches("[a-z]*")  || nome.length() < 3) {
+            throw new NomeInvalido();
         }
+        else
+            this.nome = nome;
     }
     
     public String getEmail(){
         return this.email;
     }
     
-    public void setEmail(String email){
+    public void setEmail(String email) throws EmailInvalido{ //email deve conter @ e .com
         if(email.contains("@") && email.contains(".com")){
             this.email = email;
         } else{
-            System.out.println("Email inválido!");
+            throw new EmailInvalido();
         }
     }
     
@@ -76,7 +77,7 @@ public class Usuario  {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
-    }
+    } //pra arrumar
 
     public boolean isIsLogged() {
         return isLogged;

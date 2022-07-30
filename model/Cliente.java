@@ -17,24 +17,30 @@ public class Cliente  {
     
     public Cliente(){
      
-   }
+    }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String nome) throws NomeInvalido{
+        String aux=nome;
+        if (!aux.replaceAll(" ", "").toLowerCase().matches("[a-z]*") || nome.length() < 3) {
+            throw new NomeInvalido();
+        }
+        else
+            this.nome = nome;
     }
 
     public String getEmeail() {
         return email;
     }
 
-    public void setEmeail(String emeail) {
-        this.email = emeail;
+    public void setEmail(String email) throws EmailInvalido{
+        if(!email.contains("@") || !email.contains(".com"))
+            throw new EmailInvalido();
+        else
+            this.email = email;
     }
-    
-    
-   
+
 }

@@ -12,7 +12,7 @@ package ufjf.dcc025.trabalhooo.model;
  */
 public class PF  extends Cliente{
 
-    private int cpf ;
+    private String cpf ;
     private String date;
     
     
@@ -20,17 +20,20 @@ public class PF  extends Cliente{
     }
     
     
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
-        this.cpf = cpf;
+    public void setCPF(String CPF) throws CPFInvalido {
+        if (CPF.length() == 11 && CPF.matches("[0-9]*"))
+            this.cpf = CPF;
+        else
+            throw new CPFInvalido();
     }
 
     public String getDate() {
         return date;
-    }
+    } //Fazer tratamento!
 
     public void setDate(String date) {
         this.date = date;
