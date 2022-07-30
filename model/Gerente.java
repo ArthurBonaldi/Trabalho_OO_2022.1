@@ -12,8 +12,6 @@ package ufjf.dcc025.trabalhooo.model;
  */
 public class Gerente extends Usuario  {
     
-    
-    
    public Gerente(){
        
    }

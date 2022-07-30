@@ -4,10 +4,23 @@
  */
 package ufjf.dcc025.trabalhooo.controller;
 
+import java.util.List;
+
+import ufjf.dcc025.trabalhooo.model.Usuario;
+
 /**
  *
  * @author arthu
  */
 public class LoginController {
-    
+
+    public static boolean logar(String email, String senha){
+        List<Usuario> usuarios = Usuario.getUsuarios();
+        for(Usuario u: usuarios){
+            if(u.getEmail().equals(email) && u.getSenha().equals(senha)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
