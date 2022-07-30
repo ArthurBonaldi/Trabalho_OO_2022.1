@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Maquina {
     public String nome;
-    public double peso;
+    public String peso;
     public Date dataDeManutencao;
     private int id;
     private static int currentId;
@@ -17,23 +17,35 @@ public class Maquina {
         return this.nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String nome) throws NomeInvalido{
+        String aux = nome;
+        if (!aux.replaceAll(" ", "").toLowerCase().matches("[a-z]*") || nome.length() < 3) {
+            throw new NomeInvalido();
+        }
+        else
+            this.nome = nome;
     }
 
     public double getPeso() {
-        return this.peso;
+        double aDouble = Double.parseDouble(this.peso.replaceAll(",", "."));
+        return aDouble;
     }
 
-    public void setPeso(double peso) {
-        this.peso = peso;
+    public void setPeso(String peso) throws NumeroInvalido{
+        String aux = peso.replaceAll(".",",");
+        if (!aux.replaceAll("," , "").matches("[0-9]*")) {
+            throw new NumeroInvalido();
+        }
+        else
+            this.peso = peso;
     }
 
     public Date getDataDeManutencao() {
         return this.dataDeManutencao;
     }
 
-    public void setDataDeManutencao(Date dataDeManutencao) {
+    public void setDataDeManutencao(Date dataDeManutencao){
+
         this.dataDeManutencao = dataDeManutencao;
     }
 

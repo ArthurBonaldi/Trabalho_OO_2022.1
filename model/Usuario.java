@@ -39,7 +39,7 @@ public class Usuario  {
            this.senha = senha;
        }
        else{
-           throw new Exception("Senha Invalida!");
+           throw new SenhaInvalida();
        }
     }
    
