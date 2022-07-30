@@ -33,12 +33,12 @@ public class Usuario  {
         return senha;
     }
 
-    public void setSenha(String senha) throws Exception{
+    public void setSenha(String senha) throws SenhaInvalida{
        if(senha.length() >= 6 && senha.length() <= 12 ){
            this.senha = senha;
        }
        else{
-           throw new Exception("Senha Invalida!");
+           throw new SenhaInvalida();
        }
     }
    
