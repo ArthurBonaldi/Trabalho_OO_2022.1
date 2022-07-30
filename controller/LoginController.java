@@ -18,6 +18,7 @@ public class LoginController {
         List<Usuario> usuarios = Usuario.getUsuarios();
         for(Usuario u: usuarios){
             if(u.getEmail().equals(email) && u.getSenha().equals(senha)){
+                Usuario.setLoggedUser(u);
                 return true;
             }
         }

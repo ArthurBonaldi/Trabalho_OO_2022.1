@@ -19,8 +19,9 @@ public class Usuario  {
     private String email;
     private String senha;
     private String cargo;
-    private boolean isLogged;
+
     private static List<Usuario> usuarios = new ArrayList<>();
+    private static Usuario loggedUser;
    
 
     public Usuario(){
@@ -80,14 +81,6 @@ public class Usuario  {
         this.cargo = cargo;
     } //pra arrumar
 
-    public boolean isIsLogged() {
-        return isLogged;
-    }
-
-    public void setIsLogged(boolean isLogged) {
-        this.isLogged = isLogged;
-    }
-
     public static List<Usuario> getUsuarios(){
         return usuarios;
     }
@@ -109,9 +102,6 @@ public class Usuario  {
         this.cpf = cpf;
     }
 
-    public boolean getIsLogged() {
-        return this.isLogged;
-    }
     public static void addUser(Usuario u){
         u.setId(currentId);
         usuarios.add(u);
@@ -131,5 +121,12 @@ public class Usuario  {
 
     public static void deleteUser(int id){
         usuarios.remove(getUser(id));
+    }
+
+    public static void setLoggedUser(Usuario u){
+        loggedUser = u;
+    }
+    public static Usuario getLoggedUser(){
+        return loggedUser;
     }
 }
