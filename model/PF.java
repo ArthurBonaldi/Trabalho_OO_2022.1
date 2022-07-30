@@ -7,6 +7,8 @@ package ufjf.dcc025.trabalhooo.model;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 
 /**
@@ -39,31 +41,15 @@ public class PF  extends Cliente{
     }
 
     public void setDate (Date date) throws DataInvalida {
-        int idade;
+        LocalDate dataRecebida = date.toInstant().atZone( ZoneId.systemDefault() ).toLocalDate();
+        final LocalDate dataAtual = LocalDate.now();
+        final Period periodo = Period.between(dataRecebida, dataAtual);
 
-        Date dataAtual = new Date(System.currentTimeMillis());
-
-        LocalDate dataRecebida = LocalDate.parse((CharSequence) date);
-        LocalDate dataAtualizada = LocalDate.parse((CharSequence) dataAtual);
-
-        int ano = dataRecebida.getYear();
-        int mes = dataRecebida.getMonthValue();
-        int dia = dataRecebida.getDayOfMonth();
-
-        int anoatual = dataAtualizada.getYear();
-        int mesatual = dataAtualizada.getMonthValue();
-        int diaatual = dataAtualizada.getDayOfMonth();
-
-        int totalIdade = 365 * anoatual + 30 * mesatual + diaatual - 365 * ano - 30 * mes - dia;
-
-        idade = totalIdade / 365;
-
-        if(idade > 18)
+        if (periodo.getYears() > 18)
             this.date = date;
         else
             throw new DataInvalida();
     }
-    
  
     
    
