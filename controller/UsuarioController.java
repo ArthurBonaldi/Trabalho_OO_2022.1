@@ -7,7 +7,7 @@ import ufjf.dcc025.trabalhooo.model.Usuario;
 
 public class UsuarioController {
     
-    public static void create(String nome, String email, String senha, String cargo){
+    public static Usuario create(String nome, String email, String senha, String cargo){
         Usuario usuario = new Usuario();
         try {
             usuario.setNome(nome);
@@ -22,10 +22,10 @@ public class UsuarioController {
         }catch (SenhaInvalida Sn){
             System.out.println(Sn.getMessage());
         }
-
+        return usuario;  
     }
 
-    public static void update(String nome, String email, String senha, String cargo, int id){
+    public static Usuario update(String nome, String email, String senha, String cargo, int id){
         Usuario usuario = Usuario.getUser(id);
         try {
             usuario.setNome(nome);
@@ -39,6 +39,7 @@ public class UsuarioController {
         }catch (SenhaInvalida Sn){
             System.out.println(Sn.getMessage());
         }
+        return usuario;
     }
 
     public static void delete(int id){
