@@ -1,9 +1,10 @@
 package ufjf.dcc025.trabalhooo.controller;
 
+import javax.swing.JOptionPane;
 import ufjf.dcc025.trabalhooo.model.*;
 
 public class ProdutoController {
-    public static void create(String nome, String quantidade, String preco){
+    public static Produto create(String nome, String quantidade, String preco){
         Produto produto = new Produto();
         try {
             produto.setNome(nome);
@@ -11,13 +12,14 @@ public class ProdutoController {
             produto.setPreco(preco);
             Produto.addProduto(produto);
         }catch (NomeInvalido Nm){
-            System.out.println(Nm.getMessage());
+            JOptionPane.showMessageDialog(null, Nm);
         }catch (NumeroInvalido Num) {
-            System.out.println(Num.getMessage());
+            JOptionPane.showMessageDialog(null, Num);
         }
+        return produto;
     }
 
-    public static void update(String nome, String quantidade, String preco, int id){
+    public static Produto update(String nome, String quantidade, String preco, int id){
         Produto produto = Produto.getProduto(id);
         try {
             produto.setNome(nome);
@@ -28,6 +30,7 @@ public class ProdutoController {
         }catch (NumeroInvalido Num) {
             System.out.println(Num.getMessage());
         }
+        return produto;
     }
 
     public static void delete(int id){

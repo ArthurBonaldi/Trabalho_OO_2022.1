@@ -4,6 +4,8 @@
  */
 package ufjf.dcc025.trabalhooo.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 /**
@@ -43,9 +45,10 @@ public class TelaCrudFuncionarios extends JFrame {
         });
     }
     
+    
     private void initComponents() {
 
-          jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         nameLabel = new javax.swing.JLabel();
@@ -85,12 +88,6 @@ public class TelaCrudFuncionarios extends JFrame {
         jLabel2.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         jLabel2.setText("Email:");
 
-        tfCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-
-            }
-        });
-
         jLabel3.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         jLabel3.setText("CPF/CNPJ");
 
@@ -117,20 +114,21 @@ public class TelaCrudFuncionarios extends JFrame {
         resetButton.setBackground(new java.awt.Color(234, 220, 166));
         resetButton.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         resetButton.setText("Resetar");
+        resetButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+        });
 
         backButton.setBackground(new java.awt.Color(234, 220, 166));
         backButton.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         backButton.setText("Voltar");
+        
 
         labelPassword.setText("Senha:");
 
         cargoComboBox.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
-        cargoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cargoComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            }
-        });
-
+        cargoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Caixa", "Padeiro" }));
         jLabel7.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         jLabel7.setText("Cargo:");
 
@@ -232,16 +230,5 @@ public class TelaCrudFuncionarios extends JFrame {
         );
 
         pack();
-    }// </editor-fold>            
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
+    }// </editor-fold>                                            
 }

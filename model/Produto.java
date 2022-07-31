@@ -9,8 +9,14 @@ public class Produto {
     private String preco;
     private int id;
     private static int currentId;
-
     private static List<Produto> produtos = new ArrayList<>();
+    
+    
+    public static List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    
 
     public String getNome() {return this.nome;}
 
