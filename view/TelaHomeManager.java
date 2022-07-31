@@ -8,13 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import ufjf.dcc025.trabalhooo.controller.CalcValor;
 import ufjf.dcc025.trabalhooo.model.Usuario;
 
 /**
  *
  * @author arthu
  */
-public class TelaHomeManager extends JFrame {
+public class TelaHomeManager extends JFrame implements CalcValor {
 
     public TelaHomeManager() {
         initComponents();
@@ -243,6 +244,11 @@ public class TelaHomeManager extends JFrame {
                 new TelaHomeManager().setVisible(true);
             }
         });
+    }
+
+    @Override
+    public void calculaValor() {
+       
     }
 
 }

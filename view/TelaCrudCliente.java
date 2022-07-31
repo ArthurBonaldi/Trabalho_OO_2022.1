@@ -4,13 +4,16 @@
  */
 package ufjf.dcc025.trabalhooo.view;
 
+import java.text.DateFormat;
+import java.util.Date;
 import javax.swing.JFrame;
+import ufjf.dcc025.trabalhooo.controller.FormatDate;
 
 /**
  *
  * @author arthu
  */
-public class TelaCrudCliente extends JFrame {
+public class TelaCrudCliente extends JFrame implements FormatDate {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -49,6 +52,12 @@ public class TelaCrudCliente extends JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     }     
+     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        Date data = jDateChooser1.getDate();
+        String strDate = DateFormat.getDateInstance().format(data);
+        strDate = formataData(strDate);
+        System.out.println(strDate);
+    }  
     
     private void initComponents() {
 
@@ -63,7 +72,7 @@ public class TelaCrudCliente extends JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser(new Date(), "dd/MM/yyyy");
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -106,6 +115,11 @@ public class TelaCrudCliente extends JFrame {
 
         jButton1.setBackground(new java.awt.Color(234, 220, 166));
         jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(234, 220, 166));
         jButton2.setText("Editar");
@@ -216,4 +230,50 @@ public class TelaCrudCliente extends JFrame {
 
         pack();
     }// </editor-fold>   
+
+    @Override
+    public String formataData(String d) {
+        String [] sub;
+        sub = d.split(" ");
+        switch(sub[2]){
+            case "jan":
+                sub[2] = "01";
+                break;
+             case "feb":
+                sub[2] = "02";
+                break;
+                 case "mar":
+                sub[2] = "03";
+                break;
+                 case "abr":
+                sub[2] = "04";
+                break;
+                 case "mai":
+                sub[2] = "05";
+                break;
+                 case "jun":
+                sub[2] = "06";
+                break;
+                 case "jul":
+                sub[2] = "07";
+                break;
+                 case "ago":
+                sub[2] = "08";
+                break;
+                 case "set":
+                sub[2] = "09";
+                break;
+                 case "out":
+                sub[2] = "10";
+                break;
+                 case "nov":
+                sub[2] = "11";
+                break;
+                 case "dez":
+                sub[2] = "12";
+                break;
+        }
+        d = sub[0] + "/"+ sub[2]+ "/" + sub[4];
+       return d;
+    }
 }
