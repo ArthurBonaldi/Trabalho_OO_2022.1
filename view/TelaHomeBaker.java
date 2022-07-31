@@ -25,18 +25,23 @@ public class TelaHomeBaker extends JFrame {
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {
         int input = JOptionPane.showConfirmDialog(null, "Deseja mesmo sair?", "Logout", JOptionPane.YES_NO_OPTION);
-        if(input == 0){
+        if (input == 0) {
             TelaLogin logout = new TelaLogin();
             this.dispose();
             logout.montaTela();
+        } else {
+
         }
-        else{
-            
-        }
-        
+
     }
-    private void productsButtonActionPerformed(java.awt.event.ActionEvent evt){
-        
+     private void machineButtonActionPerformed(java.awt.event.ActionEvent evt){
+        TelaCrudMaquina maquina = new TelaCrudMaquina();
+        this.dispose();
+        maquina.montaTela();
+    }
+
+    private void productsButtonActionPerformed(java.awt.event.ActionEvent evt) {
+
         TelacCrudProduto prods = new TelacCrudProduto();
         this.dispose();
         prods.montaTela();
@@ -68,6 +73,11 @@ public class TelaHomeBaker extends JFrame {
         machineButton.setBackground(new java.awt.Color(234, 220, 166));
         machineButton.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         machineButton.setText("Máquinas");
+        machineButton.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                machineButtonActionPerformed(evt);
+            }
+        });
 
         productsButton.setBackground(new java.awt.Color(234, 220, 166));
         productsButton.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N

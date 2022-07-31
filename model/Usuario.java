@@ -120,4 +120,7 @@ public class Usuario  {
     public static Usuario getLoggedUser(){
         return loggedUser;
     }
+    public static void addList(Usuario u){
+        usuarios.add(u);
+    }
 }

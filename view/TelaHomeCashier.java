@@ -5,6 +5,7 @@
 package ufjf.dcc025.trabalhooo.view;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,7 +25,9 @@ public class TelaHomeCashier extends JFrame {
     }
     
     private void clientsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
+        TelaCrudCliente cliente = new TelaCrudCliente();
+        this.dispose();
+        cliente.montaTela();
     }                                             
 
     private void calcBrutoActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -32,7 +35,15 @@ public class TelaHomeCashier extends JFrame {
     }                                         
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
+       int input = JOptionPane.showConfirmDialog(null, "Deseja mesmo sair?", "Logout", JOptionPane.YES_NO_OPTION);
+       if(input == 0){
+          TelaLogin logout = new TelaLogin();
+          this.dispose();
+          logout.montaTela();
+       }
+       else{
+           
+       }
     } 
     private void productsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
