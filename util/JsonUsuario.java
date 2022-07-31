@@ -15,7 +15,7 @@ import ufjf.dcc025.trabalhooo.model.Usuario;
  *
  * @author arthu
  */
-public class JsonFuncionario {
+public class JsonUsuario {
     public static String toJSON(Usuario usuario) {
         Gson gson = new Gson();
         String json = gson.toJson(usuario);
@@ -28,16 +28,16 @@ public class JsonFuncionario {
     }
      public static Usuario toUsuario(String conteudo) {
         Gson gson = new Gson();
-        Usuario contato = gson.fromJson(conteudo, Usuario.class);
+        Usuario usuario = gson.fromJson(conteudo, Usuario.class);
 
-        return contato;
+        return usuario;
     }
     public static List<Usuario> toUsuarios(String conteudo) {
         Gson gson = new Gson();
-        Type pessoasTipo = new TypeToken<ArrayList<Usuario>>() {
+        Type usuario = new TypeToken<ArrayList<Usuario>>() {
         }.getType();
-        List<Usuario> contatos = gson.fromJson(conteudo, pessoasTipo);
+        List<Usuario> usuarios = gson.fromJson(conteudo, usuario);
 
-        return contatos;
+        return usuarios;
     }
 }
