@@ -9,7 +9,7 @@ public class Maquina {
     public String peso;
     public Date dataDeManutencao;
     private int id;
-    private static int currentId;
+    private static int currentId = 1;
 
     private static List<Maquina> maquinas = new ArrayList<>();
 

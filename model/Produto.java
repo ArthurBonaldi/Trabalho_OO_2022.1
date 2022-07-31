@@ -8,7 +8,7 @@ public class Produto {
     private String quantidade;
     private String preco;
     private int id;
-    private static int currentId;
+    private static int currentId = 1;
     private static List<Produto> produtos = new ArrayList<>();
     
     
