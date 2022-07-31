@@ -18,7 +18,7 @@ import java.util.Date;
 public class PF  extends Cliente{
 
     private String cpf ;
-    private Date date;
+    private String date;
     
     
     public PF(){
@@ -36,20 +36,32 @@ public class PF  extends Cliente{
             throw new CPFInvalido();
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate (Date date) throws DataInvalida {
-        LocalDate dataRecebida = date.toInstant().atZone( ZoneId.systemDefault() ).toLocalDate();
+    public void setDate (String date) throws DataInvalida {
+        int idade=0;
         final LocalDate dataAtual = LocalDate.now();
-        final Period periodo = Period.between(dataRecebida, dataAtual);
 
-        if (periodo.getYears() > 18)
+        int anoatual = dataAtual.getYear();
+        int mesatual = dataAtual.getMonthValue();
+        int diaatual = dataAtual.getDayOfMonth();
+
+        int ano = Integer.parseInt(date.trim().substring(6));
+        int mes = Integer.parseInt(date.trim().substring(3,5));
+        int dia = Integer.parseInt(date.trim().substring(0,2));
+
+        int totalIdade = 365 * anoatual + 30 * mesatual + diaatual - 365 * ano - 30 * mes - dia;
+
+        idade = totalIdade / 365;
+
+        if(idade > 18)
             this.date = date;
         else
             throw new DataInvalida();
     }
+
  
     
    
