@@ -4,7 +4,11 @@
  */
 package ufjf.dcc025.trabalhooo.view;
 
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import ufjf.dcc025.trabalhooo.controller.UsuarioController;
+import ufjf.dcc025.trabalhooo.model.Usuario;
 
 /**
  *
@@ -20,7 +24,22 @@ public class TelaHomeBaker extends JFrame {
     private javax.swing.JLabel titleLabel;
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        int input = JOptionPane.showConfirmDialog(null, "Deseja mesmo sair?", "Logout", JOptionPane.YES_NO_OPTION);
+        if(input == 0){
+            TelaLogin logout = new TelaLogin();
+            this.dispose();
+            logout.montaTela();
+        }
+        else{
+            
+        }
+        
+    }
+    private void productsButtonActionPerformed(java.awt.event.ActionEvent evt){
+        
+        TelacCrudProduto prods = new TelacCrudProduto();
+        this.dispose();
+        prods.montaTela();
     }
 
     public TelaHomeBaker() {
@@ -53,6 +72,11 @@ public class TelaHomeBaker extends JFrame {
         productsButton.setBackground(new java.awt.Color(234, 220, 166));
         productsButton.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         productsButton.setText("Produtos");
+        productsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productsButtonActionPerformed(evt);
+            }
+        });
 
         exitButton.setBackground(new java.awt.Color(234, 220, 166));
         exitButton.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
