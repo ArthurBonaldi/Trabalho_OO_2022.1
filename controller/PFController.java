@@ -17,9 +17,7 @@ public class PFController {
             pessoaF.setEmail(email);
             pessoaF.setCPF(CPF);
             pessoaF.setDate(data);
-
             PF.addUser(pessoaF);
-
         }catch (NomeInvalido Nm){
             System.out.println(Nm.getMessage());
         }catch (EmailInvalido Em){
@@ -32,15 +30,12 @@ public class PFController {
         return pessoaF;
     }
     public static PF update(String nome, String email,String CPF,String data ) {
-        PF pessoaF = Cliente.getUser(id);
+        PF pessoaF = PF.getUser(id);
         try {
             pessoaF.setNome(nome);
             pessoaF.setEmail(email);
             pessoaF.setCPF(CPF);
             pessoaF.setDate(data);
-
-            //Cliente.addUser(pessoaF);
-
         } catch (NomeInvalido Nm) {
             System.out.println(Nm.getMessage());
         } catch (EmailInvalido Em) {
