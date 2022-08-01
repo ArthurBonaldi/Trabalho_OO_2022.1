@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import ufjf.dcc025.trabalhooo.controller.ButtonFunction;
 import ufjf.dcc025.trabalhooo.controller.FormatDate;
 import ufjf.dcc025.trabalhooo.controller.MaquinaController;
 import ufjf.dcc025.trabalhooo.model.Maquina;
@@ -21,7 +22,7 @@ import ufjf.dcc025.trabalhooo.model.Usuario;
  *
  * @author arthu
  */
-public class TelaCrudMaquina extends JFrame implements FormatDate {
+public class TelaCrudMaquina extends JFrame implements FormatDate, ButtonFunction {
 
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -100,7 +101,7 @@ public class TelaCrudMaquina extends JFrame implements FormatDate {
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
 
@@ -111,7 +112,7 @@ public class TelaCrudMaquina extends JFrame implements FormatDate {
                 DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
                 String idText = tbl.getValueAt(jTable1.getSelectedRow(), 0).toString();
                 int id = Integer.parseInt(idText);
-                jButton2ActionPerformed(evt, id);
+                editButtonActionPerformed(evt, id);
             }
         });
 
@@ -122,7 +123,7 @@ public class TelaCrudMaquina extends JFrame implements FormatDate {
                 DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
                 String idText = tbl.getValueAt(jTable1.getSelectedRow(), 0).toString();
                 int id = Integer.parseInt(idText);
-                jButton3ActionPerformed(evt, id);
+                deleteButtonActionPerformed(evt, id);
             }
         });
 
@@ -130,7 +131,7 @@ public class TelaCrudMaquina extends JFrame implements FormatDate {
         jButton4.setText("Resetar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                resetButtonActionPerformed(evt);
             }
         });
 
@@ -138,7 +139,7 @@ public class TelaCrudMaquina extends JFrame implements FormatDate {
         jButton5.setText("Voltar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -230,8 +231,9 @@ public class TelaCrudMaquina extends JFrame implements FormatDate {
 
         pack();
     }// </editor-fold>                        
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+    
+    @Override
+    public void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
         Date data = jDateChooser1.getDate();
         String strDate = DateFormat.getDateInstance().format(data);
         strDate = formataData(strDate);
@@ -242,7 +244,8 @@ public class TelaCrudMaquina extends JFrame implements FormatDate {
         model.addRow(new Object[]{created.getId(), created.getNome(), created.getPeso(), created.getDataDeManutencao()});
     }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt, int id) {
+    @Override
+    public void editButtonActionPerformed(java.awt.event.ActionEvent evt, int id) {
         Date data = jDateChooser1.getDate();
         String strDate = DateFormat.getDateInstance().format(data);
         strDate = formataData(strDate);
@@ -256,7 +259,8 @@ public class TelaCrudMaquina extends JFrame implements FormatDate {
         tblmodel.setValueAt(editado.getDataDeManutencao(), jTable1.getSelectedRow(), 3);
     }
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt, int id) {
+    @Override
+    public void deleteButtonActionPerformed(java.awt.event.ActionEvent evt, int id) {
         MaquinaController maquina = new MaquinaController();
         int option = JOptionPane.showConfirmDialog(null,"Excluindo Produto", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
         if(option == 0){
@@ -269,7 +273,8 @@ public class TelaCrudMaquina extends JFrame implements FormatDate {
         }
     }
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
         Usuario user = Usuario.getLoggedUser();
         if (user.getCargo().equals("Padeiro")) {
             TelaHomeBaker baker = new TelaHomeBaker();
@@ -287,7 +292,8 @@ public class TelaCrudMaquina extends JFrame implements FormatDate {
         }
     }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {
         jTextField1.setText("");
         jTextField2.setText("");
     }

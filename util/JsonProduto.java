@@ -4,6 +4,13 @@
  */
 package ufjf.dcc025.trabalhooo.util;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
+import java.util.List;
+import ufjf.dcc025.trabalhooo.model.Produto;
+
+
 /**
  *
  * @author arthu

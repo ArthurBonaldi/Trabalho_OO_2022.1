@@ -27,6 +27,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import ufjf.dcc025.trabalhooo.controller.ProdutoController;
+import ufjf.dcc025.trabalhooo.controller.ButtonFunction;
 import ufjf.dcc025.trabalhooo.model.Usuario;
 import ufjf.dcc025.trabalhooo.model.Produto;
 
@@ -34,7 +35,7 @@ import ufjf.dcc025.trabalhooo.model.Produto;
  *
  * @author arthu
  */
-public class TelacCrudProduto extends JFrame {
+public class TelacCrudProduto extends JFrame implements ButtonFunction {
 
     private JButton addButton;
     private JButton backButton;
@@ -70,7 +71,9 @@ public class TelacCrudProduto extends JFrame {
        
     }
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt, int id) {
+
+    @Override
+    public void editButtonActionPerformed(java.awt.event.ActionEvent evt, int id) {
         DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
         ProdutoController edit  = new ProdutoController();
         Produto editado;
@@ -81,8 +84,8 @@ public class TelacCrudProduto extends JFrame {
         tblmodel.setValueAt(editado.getPreco(), jTable1.getSelectedRow(), 3);
         
     }
-
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt, int id) {
+    @Override
+    public void deleteButtonActionPerformed(java.awt.event.ActionEvent evt, int id) {
         ProdutoController produto = new ProdutoController();
         int option = JOptionPane.showConfirmDialog(null,"Excluindo Produto", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
         if(option == 0){
@@ -96,7 +99,8 @@ public class TelacCrudProduto extends JFrame {
         
     }
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
         ProdutoController prod = new ProdutoController();
         Produto created;
         created = prod.create(tfName.getText(), tfQuant.getText(), tfPrice.getText());
@@ -105,7 +109,7 @@ public class TelacCrudProduto extends JFrame {
         
     }
 
-    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    public void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {
         tfName.setText("");
         tfPrice.setText("");
         tfQuant.setText("");
@@ -119,7 +123,8 @@ public class TelacCrudProduto extends JFrame {
         });
     }
 
-    private void backButtonActionPerformed(ActionEvent evt) {
+    @Override
+    public void backButtonActionPerformed(ActionEvent evt) {
         Usuario user = Usuario.getLoggedUser();
         if (user.getCargo().equals("Padeiro")) {
             TelaHomeBaker baker = new TelaHomeBaker();

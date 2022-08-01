@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import ufjf.dcc025.trabalhooo.controller.ButtonFunction;
 import ufjf.dcc025.trabalhooo.controller.UsuarioController;
 import ufjf.dcc025.trabalhooo.model.Usuario;
 
@@ -20,7 +21,7 @@ import ufjf.dcc025.trabalhooo.model.Usuario;
  *
  * @author arthu
  */
-public class TelaCrudFuncionarios extends JFrame {
+public class TelaCrudFuncionarios extends JFrame implements ButtonFunction {
 
     private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
@@ -45,7 +46,8 @@ public class TelaCrudFuncionarios extends JFrame {
         initComponents();
     }
 
-    private void backButtonActionPerformed(ActionEvent evt) {
+    @Override
+    public void backButtonActionPerformed(ActionEvent evt) {
         Usuario user = Usuario.getLoggedUser();
         if (user.getCargo().equals("Padeiro")) {
             TelaHomeBaker baker = new TelaHomeBaker();
@@ -63,45 +65,50 @@ public class TelaCrudFuncionarios extends JFrame {
         }
     }
 
-    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {
         tfName.setText("");
         tfPassword.setText("");
         tfEmail.setText("");
     }
-    private void editButtonActionPerformed(ActionEvent evt, int id){
+
+    @Override
+    public void editButtonActionPerformed(ActionEvent evt, int id) {
         DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
         UsuarioController userUp = new UsuarioController();
         Usuario editU = new Usuario();
         editU = userUp.update(tfName.getText(), tfEmail.getText(), tfPassword.getText(), jComboBox1.getSelectedItem().toString(), id);
-        tblmodel.setValueAt(editU.getNome(),jTable1.getSelectedRow() , 1);
-        tblmodel.setValueAt(editU.getEmail(),jTable1.getSelectedRow() , 2);
-        tblmodel.setValueAt(editU.getCargo(),jTable1.getSelectedRow() , 3);
-        
+        tblmodel.setValueAt(editU.getNome(), jTable1.getSelectedRow(), 1);
+        tblmodel.setValueAt(editU.getEmail(), jTable1.getSelectedRow(), 2);
+        tblmodel.setValueAt(editU.getCargo(), jTable1.getSelectedRow(), 3);
+
     }
-        private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt, int id) {
+
+    @Override
+    public void deleteButtonActionPerformed(java.awt.event.ActionEvent evt, int id) {
         UsuarioController produto = new UsuarioController();
-        int option = JOptionPane.showConfirmDialog(null,"Excluindo Produto", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
-        if(option == 0){
-        produto.delete(id);
-        DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
-        tblmodel.removeRow(jTable1.getSelectedRow());
+        int option = JOptionPane.showConfirmDialog(null, "Excluindo Produto", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
+        if (option == 0) {
+            produto.delete(id);
+            DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
+            tblmodel.removeRow(jTable1.getSelectedRow());
+        } else {
+
         }
-        else{
-            
-        }
-        
+
     }
 
     private void jTable1MouseClicked(MouseEvent evt) {
         DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
-        String tblname = tbl.getValueAt(jTable1.getSelectedRow(),1).toString();
-        String tblEmail = tbl.getValueAt(jTable1.getSelectedRow(),2).toString();
+        String tblname = tbl.getValueAt(jTable1.getSelectedRow(), 1).toString();
+        String tblEmail = tbl.getValueAt(jTable1.getSelectedRow(), 2).toString();
         tfName.setText(tblname);
         tfEmail.setText(tblEmail);
-     
+
     }
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
         UsuarioController user = new UsuarioController();
         Usuario created;
         created = user.create(tfName.getText(), tfEmail.getText(), tfPassword.getText(), jComboBox1.getSelectedItem().toString());
@@ -148,7 +155,6 @@ public class TelaCrudFuncionarios extends JFrame {
                 new String[]{
                     "Id", "Nome", "Email", "Cargo"
                 }
-                
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -184,9 +190,9 @@ public class TelaCrudFuncionarios extends JFrame {
         editButton.setText("Editar");
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DefaultTableModel tbl = (DefaultTableModel)jTable1.getModel();
-                String idText =tbl. getValueAt(jTable1.getSelectedRow(), 0).toString();
-                int id  = Integer.parseInt(idText);
+                DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
+                String idText = tbl.getValueAt(jTable1.getSelectedRow(), 0).toString();
+                int id = Integer.parseInt(idText);
                 editButtonActionPerformed(evt, id);
             }
         });
@@ -196,9 +202,9 @@ public class TelaCrudFuncionarios extends JFrame {
         deleteButton.setText("Excluir");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                 DefaultTableModel tbl = (DefaultTableModel)jTable1.getModel();
-                String idText =tbl. getValueAt(jTable1.getSelectedRow(), 0).toString();
-                int id  = Integer.parseInt(idText);
+                DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
+                String idText = tbl.getValueAt(jTable1.getSelectedRow(), 0).toString();
+                int id = Integer.parseInt(idText);
                 deleteButtonActionPerformed(evt, id);
             }
         });
