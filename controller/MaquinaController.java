@@ -8,7 +8,7 @@ import ufjf.dcc025.trabalhooo.model.NomeInvalido;
 import ufjf.dcc025.trabalhooo.model.NumeroInvalido;
 
 public class MaquinaController {
-    public static void create(String nome, String peso, Date dataDeManutencao){
+    public static Maquina create(String nome, String peso, String dataDeManutencao){
         Maquina maquina = new Maquina();
         try {
             maquina.setNome(nome);
@@ -22,9 +22,10 @@ public class MaquinaController {
         }catch (Exception Dt){
             System.out.println("Data Invalida!");
         }
+        return maquina;
     }
 
-    public static void update(String nome, String peso, Date dataDeManutencao, int id){
+    public static Maquina update(String nome, String peso, String dataDeManutencao, int id){
         Maquina maquina = Maquina.getMaquina(id);
         try {
             maquina.setNome(nome);
@@ -37,6 +38,7 @@ public class MaquinaController {
         }catch (Exception Dt){
             System.out.println("Data Invalida!");
         }
+        return maquina;
     }
 
     public static void delete(int id){

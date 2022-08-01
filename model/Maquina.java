@@ -1,13 +1,12 @@
 package ufjf.dcc025.trabalhooo.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Maquina {
     public String nome;
     public String peso;
-    public Date dataDeManutencao;
+    public String dataDeManutencao;
     private int id;
     private static int currentId = 1;
 
@@ -19,11 +18,15 @@ public class Maquina {
 
     public void setNome(String nome) throws NomeInvalido{
         String aux = nome;
-        if (!aux.replaceAll(" ", "").toLowerCase().matches("[a-z]*") || nome.length() < 3) {
+        if (!aux.replaceAll(" ", "").toLowerCase().matches("[a-z]*") || aux.length() < 3) {
             throw new NomeInvalido();
         }
         else
             this.nome = nome;
+    }
+
+    public static List<Maquina> getMaquinas() {
+        return maquinas;
     }
 
     public double getPeso() {
@@ -40,11 +43,11 @@ public class Maquina {
             this.peso = peso;
     }
 
-    public Date getDataDeManutencao() {
+    public String  getDataDeManutencao() {
         return this.dataDeManutencao;
     }
 
-    public void setDataDeManutencao(Date dataDeManutencao){
+    public void setDataDeManutencao(String dataDeManutencao){
 
         this.dataDeManutencao = dataDeManutencao;
     }
