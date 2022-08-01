@@ -5,6 +5,8 @@
 package ufjf.dcc025.trabalhooo.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,10 +16,38 @@ public class PJ  extends Cliente{
 
    private String cnpj;
    private String razaoSocial;
-   
-   public PJ (){
-      
-   }
+
+    private static List<PJ> PessoasJ = new ArrayList<>();
+    private static int currentId =1;
+
+    private int PessoaJId;
+
+    public PJ(){
+    }
+    public int getId() {
+        return PessoaJId;
+    }
+    public void setId(int id){
+        this.PessoaJId = id;
+    }
+
+    public static void addPessoaJ(PJ pj){
+        pj.setId(currentId);
+        PessoasJ.add(pj);
+        currentId++;
+    }
+    public static PJ getPessoaJ(int id){
+
+        PJ Pessoasj = new PJ();
+
+        for(PJ pj: PessoasJ){
+            if(pj.getId() == id){
+                Pessoasj = pj;
+            }
+        }
+
+        return Pessoasj;
+    }
 
     public String getCnpj() {
         return cnpj;
