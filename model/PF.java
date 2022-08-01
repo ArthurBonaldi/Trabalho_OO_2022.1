@@ -9,7 +9,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -19,9 +21,34 @@ public class PF  extends Cliente{
 
     private String cpf ;
     private String date;
-    
+    private static List<PF> PessoasF = new ArrayList<>();
+    private static int currentId =1;
+
+    private int userId;
     
     public PF(){
+    }
+    public int getId() {
+        return userId;
+    }
+    public void setId(int id){
+        this.userId = id;
+    }
+    public static void addPessoaF(PF pf){
+        pf.setId(currentId);
+        PessoasF.add(pf);
+        currentId++;
+    }
+    public static PF getPessoaF(int id){
+        PF Pessoasf = new PF();
+
+        for(PF pf: PessoasF){
+            if(pf.getId() == id){
+                Pessoasf = pf;
+            }
+        }
+
+        return Pessoasf;
     }
     
     

@@ -17,7 +17,7 @@ public class PJController {
             pessoaJ.setEmail(email);
             pessoaJ.setCnpj(CNPJ);
             pessoaJ.setRazaoSocial(Razão);
-            PJ.addUser(pessoaJ);
+            PJ.addPessoaJ(pessoaJ);
         }catch (NomeInvalido Nm){
             System.out.println(Nm.getMessage());
         }catch (EmailInvalido Em){
@@ -27,8 +27,8 @@ public class PJController {
         }
         return pessoaJ;
     }
-    public static PF update(String nome, String email, String CNPJ, String Razão ){
-        PJ pessoaJ = PJ.getUser(id);
+    public static PJ update(String nome, String email, String CNPJ, String Razão,int id ){
+        PJ pessoaJ = PJ.getPessoaJ(id);
         try {
             pessoaJ.setNome(nome);
             pessoaJ.setEmail(email);
