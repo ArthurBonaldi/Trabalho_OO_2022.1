@@ -24,15 +24,15 @@ public class PF  extends Cliente{
     private static List<PF> PessoasF = new ArrayList<>();
     private static int currentId =1;
 
-    private int userId;
+    private int PessoaFId;
     
     public PF(){
     }
     public int getId() {
-        return userId;
+        return PessoaFId;
     }
     public void setId(int id){
-        this.userId = id;
+        this.PessoaFId = id;
     }
     public static void addPessoaF(PF pf){
         pf.setId(currentId);
@@ -41,13 +41,11 @@ public class PF  extends Cliente{
     }
     public static PF getPessoaF(int id){
         PF Pessoasf = new PF();
-
         for(PF pf: PessoasF){
             if(pf.getId() == id){
                 Pessoasf = pf;
             }
         }
-
         return Pessoasf;
     }
     

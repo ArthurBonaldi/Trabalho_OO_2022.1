@@ -20,15 +20,15 @@ public class PJ  extends Cliente{
     private static List<PJ> PessoasJ = new ArrayList<>();
     private static int currentId =1;
 
-    private int userId;
+    private int PessoaJId;
 
     public PJ(){
     }
     public int getId() {
-        return userId;
+        return PessoaJId;
     }
     public void setId(int id){
-        this.userId = id;
+        this.PessoaJId = id;
     }
 
     public static void addPessoaJ(PJ pj){
@@ -37,6 +37,7 @@ public class PJ  extends Cliente{
         currentId++;
     }
     public static PJ getPessoaJ(int id){
+
         PJ Pessoasj = new PJ();
 
         for(PJ pj: PessoasJ){
