@@ -10,10 +10,11 @@ package ufjf.dcc025.trabalhooo.model;
  *
  * @author salesmiguelz
  */
-public class Cliente  {
+public abstract class Cliente  {
     
     private String nome;
     private String email;
+    private String registro;
     
     public Cliente(){
      
@@ -22,6 +23,7 @@ public class Cliente  {
     public String getNome() {
         return nome;
     }
+
 
     public void setNome(String nome) throws NomeInvalido{
         String aux=nome;
@@ -42,5 +44,8 @@ public class Cliente  {
         else
             this.email = email;
     }
+    
+    public abstract String getRegistro();
 
+    public abstract void setRegistro (String registro) throws CPFInvalido, CNPJInvalido;
 }

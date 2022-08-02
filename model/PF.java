@@ -4,7 +4,6 @@
  */
 package ufjf.dcc025.trabalhooo.model;
 
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -17,56 +16,51 @@ import java.util.List;
  *
  * @author salesmiguelz
  */
-public class PF  extends Cliente{
+public class PF extends Cliente {
 
-    private String cpf ;
     private String date;
-    private static List<PF> PessoasF = new ArrayList<>();
-    private static int currentId =1;
+    private static List<PF> pessoasF = new ArrayList<>();
+    private static int currentId = 1;
 
-    private int PessoaFId;
-    
-    public PF(){
+    private int pessoaFId;
+
+    public PF() {
     }
+
+    public static List<PF> getPFs() {
+        return pessoasF;
+    }
+
     public int getId() {
-        return PessoaFId;
+        return pessoaFId;
     }
-    public void setId(int id){
-        this.PessoaFId = id;
+
+    public void setId(int id) {
+        this.pessoaFId = id;
     }
-    public static void addPessoaF(PF pf){
+
+    public static void addPessoaF(PF pf) {
         pf.setId(currentId);
-        PessoasF.add(pf);
+        pessoasF.add(pf);
         currentId++;
     }
-    public static PF getPessoaF(int id){
-        PF Pessoasf = new PF();
-        for(PF pf: PessoasF){
-            if(pf.getId() == id){
-                Pessoasf = pf;
+
+    public static PF getPessoaF(int id) {
+        PF pessoasf = new PF();
+        for (PF pf : pessoasF) {
+            if (pf.getId() == id) {
+                pessoasf = pf;
             }
         }
-        return Pessoasf;
-    }
-    
-    
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCPF(String CPF) throws CPFInvalido {
-        if (CPF.length() == 11 && CPF.matches("[0-9]*"))
-            this.cpf = CPF;
-        else
-            throw new CPFInvalido();
+        return pessoasf;
     }
 
     public String getDate() {
         return date;
     }
 
-    public void setDate (String date) throws DataInvalida {
-        int idade=0;
+    public void setDate(String date) throws DataInvalida {
+        int idade = 0;
         final LocalDate dataAtual = LocalDate.now();
 
         int anoatual = dataAtual.getYear();
@@ -74,20 +68,46 @@ public class PF  extends Cliente{
         int diaatual = dataAtual.getDayOfMonth();
 
         int ano = Integer.parseInt(date.trim().substring(6));
-        int mes = Integer.parseInt(date.trim().substring(3,5));
-        int dia = Integer.parseInt(date.trim().substring(0,2));
+        int mes = Integer.parseInt(date.trim().substring(3, 5));
+        int dia = Integer.parseInt(date.trim().substring(0, 2));
 
         int totalIdade = 365 * anoatual + 30 * mesatual + diaatual - 365 * ano - 30 * mes - dia;
 
         idade = totalIdade / 365;
 
-        if(idade > 18)
+        if (idade > 18) {
             this.date = date;
-        else
+        } else {
             throw new DataInvalida();
+        }
     }
 
- 
-    
-   
+    @Override
+    public String getRegistro() {
+        return getRegistro();
+    }
+
+    @Override
+    public void setRegistro(String registro) throws CPFInvalido {
+        if (registro.length() == 11 && registro.matches("[0-9]*")) {
+            setRegistro(registro);
+        } else {
+            throw new CPFInvalido();
+        }
+    }
+
+    public static PF getPF(int id) {
+        PF pf = new PF();
+        for (PF p : pessoasF) {
+            if (p.getId() == id) {
+                pf = p;
+            }
+        }
+        return pf;
+    }
+
+    public static void deletePF(int id) {
+        pessoasF.remove(getPF(id));
+    }
+
 }

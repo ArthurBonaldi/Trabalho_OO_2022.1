@@ -15,7 +15,7 @@ public class PFController {
         try {
             pessoaF.setNome(nome);
             pessoaF.setEmail(email);
-            pessoaF.setCPF(CPF);
+            pessoaF.setRegistro(CPF);
             pessoaF.setDate(data);
             PF.addPessoaF(pessoaF);
         }catch (NomeInvalido Nm){
@@ -35,7 +35,7 @@ public class PFController {
         try {
             pessoaF.setNome(nome);
             pessoaF.setEmail(email);
-            pessoaF.setCPF(CPF);
+            pessoaF.setRegistro(CPF);
             pessoaF.setDate(data);
         } catch (NomeInvalido Nm) {
             System.out.println(Nm.getMessage());
@@ -48,5 +48,7 @@ public class PFController {
         }
         return pessoaF;
     }
-    
+        public static void delete(int id){
+        PF.deletePF(id);
+    }
 }

@@ -10,13 +10,12 @@ import ufjf.dcc025.trabalhooo.model.*;
  * @author arthu
  */
 public class PJController {
-    public static PJ create(String nome, String email, String CNPJ, String Razão ){
+    public static PJ create(String nome, String email, String cnpj){
         PJ pessoaJ = new PJ();
         try {
             pessoaJ.setNome(nome);
             pessoaJ.setEmail(email);
-            pessoaJ.setCnpj(CNPJ);
-            pessoaJ.setRazaoSocial(Razão);
+            pessoaJ.setRegistro(cnpj);
             PJ.addPessoaJ(pessoaJ);
         }catch (NomeInvalido Nm){
             System.out.println(Nm.getMessage());
@@ -27,13 +26,12 @@ public class PJController {
         }
         return pessoaJ;
     }
-    public static PJ update(String nome, String email, String CNPJ, String Razão,int id ){
+    public static PJ update(String nome, String email, String cnpj,int id ){
         PJ pessoaJ = PJ.getPessoaJ(id);
         try {
             pessoaJ.setNome(nome);
             pessoaJ.setEmail(email);
-            pessoaJ.setCnpj(CNPJ);
-            pessoaJ.setRazaoSocial(Razão);
+            pessoaJ.setRegistro(cnpj);
         }catch (NomeInvalido Nm){
             System.out.println(Nm.getMessage());
         }catch (EmailInvalido Em){
@@ -42,6 +40,9 @@ public class PJController {
             System.out.println(cn.getMessage());
         }
         return pessoaJ;
+    }
+        public static void delete(int id){
+        PJ.deletePJ(id);
     }
     
 }

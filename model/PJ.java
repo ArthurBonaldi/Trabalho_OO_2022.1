@@ -4,7 +4,6 @@
  */
 package ufjf.dcc025.trabalhooo.model;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,36 +11,40 @@ import java.util.List;
  *
  * @author salesmiguelz
  */
-public class PJ  extends Cliente{
+public class PJ extends Cliente {
 
-   private String cnpj;
-   private String razaoSocial;
+    private static List<PJ> pessoasJ = new ArrayList<>();
+    private static int currentId = 1;
 
-    private static List<PJ> PessoasJ = new ArrayList<>();
-    private static int currentId =1;
+    private int pessoaJId;
 
-    private int PessoaJId;
-
-    public PJ(){
+    public PJ() {
     }
+
+    public static List<PJ> getPJs() {
+        return pessoasJ;
+    }
+
     public int getId() {
-        return PessoaJId;
-    }
-    public void setId(int id){
-        this.PessoaJId = id;
+        return pessoaJId;
     }
 
-    public static void addPessoaJ(PJ pj){
+    public void setId(int id) {
+        this.pessoaJId = id;
+    }
+
+    public static void addPessoaJ(PJ pj) {
         pj.setId(currentId);
-        PessoasJ.add(pj);
+        pessoasJ.add(pj);
         currentId++;
     }
-    public static PJ getPessoaJ(int id){
+
+    public static PJ getPessoaJ(int id) {
 
         PJ Pessoasj = new PJ();
 
-        for(PJ pj: PessoasJ){
-            if(pj.getId() == id){
+        for (PJ pj : pessoasJ) {
+            if (pj.getId() == id) {
                 Pessoasj = pj;
             }
         }
@@ -49,24 +52,30 @@ public class PJ  extends Cliente{
         return Pessoasj;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    @Override
+    public String getRegistro() {
+        return getRegistro();
     }
 
-    public void setCnpj(String cnpj) throws CNPJInvalido { //tem que ter tam 14 e só pode conter numeros
-        if (cnpj.length() == 14 && cnpj.matches("[0-9]*"))
-            this.cnpj = cnpj;
-        else
+    @Override
+    public void setRegistro(String registro) throws CNPJInvalido {
+        if (registro.length() == 14 && registro.matches("[0-9]*")) {
+            setRegistro(registro);
+        } else {
             throw new CNPJInvalido();
+        }
     }
 
-    public String getRazaoSocial() {return razaoSocial;}
-
-    public void setRazaoSocial(String razaoSocial)throws NomeInvalido { // não pode conter numero
-        String aux = razaoSocial;
-        if (!aux.replaceAll(" ", "").toLowerCase().matches("[a-z]*")) {
-            throw new NomeInvalido();
-        } else
-            this.razaoSocial = razaoSocial;
+    public static PJ getPJ(int id) {
+        PJ pf = new PJ();
+        for (PJ p : pessoasJ) {
+            if (p.getId() == id) {
+                pf = p;
+            }
+        }
+        return pf;
+    }
+        public static void deletePJ(int id) {
+        pessoasJ.remove(getPJ(id));
     }
 }
