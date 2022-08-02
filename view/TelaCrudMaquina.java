@@ -83,6 +83,10 @@ public class TelaCrudMaquina extends JFrame implements FormatDate, ButtonFunctio
                     "Id", "Nome", "Peso", "Manutenção"
                 }
         ));
+        for(Maquina m: maquinas){
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.addRow(new Object[]{m.getId(), m.getNome(), m.getPeso(), m.getDataDeManutencao()});
+        }
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);

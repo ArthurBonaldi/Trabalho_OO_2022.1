@@ -7,14 +7,13 @@ package ufjf.dcc025.trabalhooo.view;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import ufjf.dcc025.trabalhooo.controller.UsuarioController;
 import ufjf.dcc025.trabalhooo.model.Usuario;
 
 /**
  *
  * @author arthu
  */
-public class TelaHomeBaker extends JFrame {
+public class TelaEscolheCliente extends JFrame {
 
     private javax.swing.JButton exitButton;
     private javax.swing.JPanel jPanel1;
@@ -24,30 +23,38 @@ public class TelaHomeBaker extends JFrame {
     private javax.swing.JLabel titleLabel;
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        int input = JOptionPane.showConfirmDialog(null, "Deseja mesmo sair?", "Logout", JOptionPane.YES_NO_OPTION);
-        if (input == 0) {
-            TelaLogin logout = new TelaLogin();
+        Usuario user = Usuario.getLoggedUser();
+        if (user.getCargo().equals("Padeiro")) {
+            TelaHomeBaker baker = new TelaHomeBaker();
             this.dispose();
-            logout.montaTela();
-        } else {
+            baker.montaTela();
 
+        } else if (user.getCargo().equals("Gerente")) {
+            TelaHomeManager manager = new TelaHomeManager();
+            this.dispose();
+            manager.montaTela();
+        } else {
+            TelaHomeCashier cashier = new TelaHomeCashier();
+            this.dispose();
+            cashier.montaTela();
         }
 
     }
-     private void machineButtonActionPerformed(java.awt.event.ActionEvent evt){
-        TelaCrudMaquina maquina = new TelaCrudMaquina();
+
+    private void pfButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        TelaCrudPF pf = new TelaCrudPF();
         this.dispose();
-        maquina.montaTela();
+        pf.montaTela();
     }
 
-    private void productsButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void pjButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
-        TelacCrudProduto prods = new TelacCrudProduto();
+        TelaCrudPJ pj = new TelaCrudPJ();
         this.dispose();
-        prods.montaTela();
+        pj.montaTela();
     }
 
-    public TelaHomeBaker() {
+    public TelaEscolheCliente() {
         initComponents();
     }
 
@@ -63,34 +70,30 @@ public class TelaHomeBaker extends JFrame {
 
         jPanel1.setBackground(new java.awt.Color(226, 194, 117));
 
-        titleLabel.setBackground(new java.awt.Color(0, 0, 0));
-        titleLabel.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
-        titleLabel.setText("       Bem-Vindo " + Usuario.getLoggedUser().getNome());
-
         subtitleLabel.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
-        subtitleLabel.setText("         Selecione uma categoria:");
+        subtitleLabel.setText("     Selecione o tipo de Cliente:");
 
         machineButton.setBackground(new java.awt.Color(234, 220, 166));
         machineButton.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
-        machineButton.setText("Máquinas");
+        machineButton.setText("Física");
         machineButton.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                machineButtonActionPerformed(evt);
+                pfButtonActionPerformed(evt);
             }
         });
 
         productsButton.setBackground(new java.awt.Color(234, 220, 166));
         productsButton.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
-        productsButton.setText("Produtos");
+        productsButton.setText("Jurídica");
         productsButton.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                productsButtonActionPerformed(evt);
+                pjButtonActionPerformed(evt);
             }
         });
 
         exitButton.setBackground(new java.awt.Color(234, 220, 166));
         exitButton.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
-        exitButton.setText("Sair");
+        exitButton.setText("Voltar");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
@@ -155,8 +158,9 @@ public class TelaHomeBaker extends JFrame {
     public void montaTela() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaHomeBaker().setVisible(true);
+                new TelaEscolheCliente().setVisible(true);
             }
         });
     }
+
 }

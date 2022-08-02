@@ -6,6 +6,7 @@ package ufjf.dcc025.trabalhooo.view;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import ufjf.dcc025.trabalhooo.model.Usuario;
 
 /**
  *
@@ -25,7 +26,7 @@ public class TelaHomeCashier extends JFrame {
     }
     
     private void clientsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        TelaCrudCliente cliente = new TelaCrudCliente();
+        TelaEscolheCliente cliente = new TelaEscolheCliente();
         this.dispose();
         cliente.montaTela();
     }                                             
@@ -46,7 +47,9 @@ public class TelaHomeCashier extends JFrame {
        }
     } 
     private void productsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
+        TelacCrudProduto crudProduto = new TelacCrudProduto();
+        this.dispose();
+        crudProduto.montaTela();
     } 
     
 
@@ -66,7 +69,7 @@ public class TelaHomeCashier extends JFrame {
 
         titleLabel.setBackground(new java.awt.Color(0, 0, 0));
         titleLabel.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
-        titleLabel.setText("      Bem-Vindo(a) Fulano(a)");
+        titleLabel.setText("       Bem-Vindo " + Usuario.getLoggedUser().getNome());
 
         subtitleLabel.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         subtitleLabel.setText("         Selecione uma categoria:");

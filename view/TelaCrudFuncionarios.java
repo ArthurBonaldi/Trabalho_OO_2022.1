@@ -43,6 +43,7 @@ public class TelaCrudFuncionarios extends JFrame implements ButtonFunction {
     private static List<Usuario> usuarios = new ArrayList<>();
 
     public TelaCrudFuncionarios() {
+        usuarios = Usuario.getUsuarios();
         initComponents();
     }
 
