@@ -17,7 +17,6 @@ import java.util.List;
  * @author salesmiguelz
  */
 public class PF extends Cliente {
-
     private String date;
     private static List<PF> pessoasF = new ArrayList<>();
     private static int currentId = 1;
@@ -84,13 +83,13 @@ public class PF extends Cliente {
 
     @Override
     public String getRegistro() {
-        return getRegistro();
+        return this.registro;
     }
 
     @Override
     public void setRegistro(String registro) throws CPFInvalido {
         if (registro.length() == 11 && registro.matches("[0-9]*")) {
-            setRegistro(registro);
+             this.registro = registro;
         } else {
             throw new CPFInvalido();
         }

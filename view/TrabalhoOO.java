@@ -20,7 +20,7 @@ public class TrabalhoOO {
         user = add.create("Arthur", "arthur.bonaldi@codejr.com.br", "123456789", "Gerente");       
         
         
-        TelaLogin login = new TelaLogin();
+        TelaCrudCliente login = new TelaCrudCliente();
         login.montaTela();
     }
 }

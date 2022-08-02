@@ -5,12 +5,19 @@
 package ufjf.dcc025.trabalhooo.view;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import ufjf.dcc025.trabalhooo.controller.ButtonFunction;
 import ufjf.dcc025.trabalhooo.controller.FormatDate;
+import ufjf.dcc025.trabalhooo.controller.PFController;
+import ufjf.dcc025.trabalhooo.controller.PJController;
+import ufjf.dcc025.trabalhooo.model.PF;
+import ufjf.dcc025.trabalhooo.model.PJ;
+import ufjf.dcc025.trabalhooo.model.Usuario;
 
 /**
  *
@@ -24,7 +31,6 @@ public class TelaCrudCliente extends JFrame implements FormatDate, ButtonFunctio
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -36,7 +42,6 @@ public class TelaCrudCliente extends JFrame implements FormatDate, ButtonFunctio
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JLabel jLabel6;
 
     public TelaCrudCliente() {
         initComponents();
@@ -52,30 +57,109 @@ public class TelaCrudCliente extends JFrame implements FormatDate, ButtonFunctio
 
     @Override
     public void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        Date data = jDateChooser1.getDate();
-        String strDate = DateFormat.getDateInstance().format(data);
-        strDate = formataData(strDate);
-        
+        if (jTextField3.getText().length() == 11) {
+            Date data = jDateChooser1.getDate();
+            String strDate = DateFormat.getDateInstance().format(data);
+            strDate = formataData(strDate);
+            PFController pf = new PFController();
+            PF created = new PF();
+            created = pf.create(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), strDate);
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.addRow(new Object[]{created.getId(), created.getNome(), created.getEmail(), created.getRegistro(), created.getDate()});
+        } else if (jTextField3.getText().length() == 14) {
+            PJController pj = new PJController();
+            PJ created = new PJ();
+            created = pj.create(jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.addRow(new Object[]{created.getId(), created.getNome(), created.getEmail(), created.getRegistro()});
+        } else {
+            JOptionPane.showMessageDialog(null, "Formato de registro inválido");
+        }
+
     }
 
     @Override
     public void editButtonActionPerformed(ActionEvent evt, int id) {
-       
+        if (jTextField3.getText().length() == 11) {
+            Date data = jDateChooser1.getDate();
+            String strDate = DateFormat.getDateInstance().format(data);
+            strDate = formataData(strDate);
+            PFController pf = new PFController();
+            PF edited = new PF();
+            edited = pf.update(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), strDate, id);
+            DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
+            tblmodel.setValueAt(edited.getNome(), jTable1.getSelectedRow(), 1);
+            tblmodel.setValueAt(edited.getEmail(), jTable1.getSelectedRow(), 2);
+            tblmodel.setValueAt(edited.getRegistro(), jTable1.getSelectedRow(), 3);
+            tblmodel.setValueAt(edited.getDate(), jTable1.getSelectedRow(), 4);
+        } else if (jTextField3.getText().length() == 14) {
+            PJController pj = new PJController();
+            PJ edited = new PJ();
+            edited = pj.update(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), id);
+            DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
+            tblmodel.setValueAt(edited.getNome(), jTable1.getSelectedRow(), 1);
+            tblmodel.setValueAt(edited.getEmail(), jTable1.getSelectedRow(), 2);
+            tblmodel.setValueAt(edited.getRegistro(), jTable1.getSelectedRow(), 3);
+        } else {
+            JOptionPane.showMessageDialog(null, "Formato de registro inválido");
+        }
     }
 
     @Override
     public void deleteButtonActionPerformed(ActionEvent evt, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (jTextField3.getText().length() == 11) {
+            PFController pf = new PFController();
+            int option = JOptionPane.showConfirmDialog(null, "Excluindo Produto", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
+            if (option == 0) {
+                pf.delete(id);
+                DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
+                tblmodel.removeRow(jTable1.getSelectedRow());
+            }
+        } else {
+            PJController pj = new PJController();
+            int option = JOptionPane.showConfirmDialog(null, "Excluindo Produto", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
+            if (option == 0) {
+                pj.delete(id);
+                DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
+                tblmodel.removeRow(jTable1.getSelectedRow());
+            }
+        }
     }
 
     @Override
     public void resetButtonActionPerformed(ActionEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
     }
 
     @Override
     public void backButtonActionPerformed(ActionEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Usuario user = Usuario.getLoggedUser();
+        if (user.getCargo().equals("Padeiro")) {
+            TelaHomeBaker baker = new TelaHomeBaker();
+            this.dispose();
+            baker.montaTela();
+
+        } else if (user.getCargo().equals("Gerente")) {
+            TelaHomeManager manager = new TelaHomeManager();
+            this.dispose();
+            manager.montaTela();
+        } else {
+            TelaHomeCashier cashier = new TelaHomeCashier();
+            this.dispose();
+            cashier.montaTela();
+        }
+    }
+
+    private void jTable1MouseClicked(MouseEvent evt) {
+        DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
+        String tblname = tbl.getValueAt(jTable1.getSelectedRow(), 1).toString();
+        String tblEmail = tbl.getValueAt(jTable1.getSelectedRow(), 2).toString();
+        String tblReg = tbl.getValueAt(jTable1.getSelectedRow(), 3).toString();
+        jTextField1.setText(tblname);
+        jTextField2.setText(tblEmail);
+        jTextField3.setText(tblReg);
     }
 
     private void initComponents() {
@@ -97,8 +181,6 @@ public class TelaCrudCliente extends JFrame implements FormatDate, ButtonFunctio
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -108,9 +190,14 @@ public class TelaCrudCliente extends JFrame implements FormatDate, ButtonFunctio
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "Nome/Razão Social", "Email", "CPF/CNPJ", "Data de Nascimento"
+                    "id", "Nome/Razão Social", "Email", "CPF/CNPJ", "Data de Nascimento"
                 }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setText("Nome/Razão Social: ");
@@ -169,9 +256,6 @@ public class TelaCrudCliente extends JFrame implements FormatDate, ButtonFunctio
                 backButtonActionPerformed(evt);
             }
         });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Pessoa Física", "Pessoa Jurídica"}));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -184,10 +268,6 @@ public class TelaCrudCliente extends JFrame implements FormatDate, ButtonFunctio
                                                 .addGap(70, 70, 70))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(22, 22, 22)
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(66, 66, 66)
-                                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                                                 .addGap(0, 0, Short.MAX_VALUE)

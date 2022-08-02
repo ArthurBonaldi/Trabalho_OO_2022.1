@@ -12,9 +12,9 @@ package ufjf.dcc025.trabalhooo.model;
  */
 public abstract class Cliente  {
     
-    private String nome;
-    private String email;
-    private String registro;
+    protected String nome;
+    protected String email;
+    protected String registro;
     
     public Cliente(){
      

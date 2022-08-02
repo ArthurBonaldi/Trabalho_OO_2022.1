@@ -54,13 +54,13 @@ public class PJ extends Cliente {
 
     @Override
     public String getRegistro() {
-        return getRegistro();
+        return this.registro;
     }
 
     @Override
     public void setRegistro(String registro) throws CNPJInvalido {
         if (registro.length() == 14 && registro.matches("[0-9]*")) {
-            setRegistro(registro);
+            this.registro = registro;
         } else {
             throw new CNPJInvalido();
         }
