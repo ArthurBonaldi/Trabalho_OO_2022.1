@@ -3,6 +3,12 @@ package ufjf.dcc025.trabalhooo.controller;
 import javax.swing.JOptionPane;
 import ufjf.dcc025.trabalhooo.model.*;
 
+/**
+ *
+ * @author Arthur Bonaldi Fernandes - 202065567C
+ * @author Joel Henrique Nunes de Oliveira Silva - 202076030
+ * @author Miguel Sales de Almeida Lopes - 202076024
+ */
 public class ProdutoController {
     public static Produto create(String nome, String quantidade, String preco){
         Produto produto = new Produto();

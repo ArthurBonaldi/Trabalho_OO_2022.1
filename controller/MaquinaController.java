@@ -1,11 +1,19 @@
 package ufjf.dcc025.trabalhooo.controller;
 
+
 import java.text.ParseException;
 import java.util.Date;
 
 import ufjf.dcc025.trabalhooo.model.Maquina;
 import ufjf.dcc025.trabalhooo.model.NomeInvalido;
 import ufjf.dcc025.trabalhooo.model.NumeroInvalido;
+
+/**
+ *
+ * @author Arthur Bonaldi Fernandes - 202065567C
+ * @author Joel Henrique Nunes de Oliveira Silva - 202076030
+ * @author Miguel Sales de Almeida Lopes - 202076024
+ */
 
 public class MaquinaController {
     public static Maquina create(String nome, String peso, String dataDeManutencao){

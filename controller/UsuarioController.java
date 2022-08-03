@@ -5,6 +5,13 @@ import ufjf.dcc025.trabalhooo.model.NomeInvalido;
 import ufjf.dcc025.trabalhooo.model.SenhaInvalida;
 import ufjf.dcc025.trabalhooo.model.Usuario;
 
+/**
+ *
+ * @author Arthur Bonaldi Fernandes - 202065567C
+ * @author Joel Henrique Nunes de Oliveira Silva - 202076030
+ * @author Miguel Sales de Almeida Lopes - 202076024
+ */
+
 public class UsuarioController {
     
     public static Usuario create(String nome, String email, String senha, String cargo){
