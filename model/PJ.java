@@ -48,7 +48,6 @@ public class PJ extends Cliente {
                 Pessoasj = pj;
             }
         }
-
         return Pessoasj;
     }
 
@@ -59,6 +58,11 @@ public class PJ extends Cliente {
 
     @Override
     public void setRegistro(String registro) throws CNPJInvalido {
+        //Verifica se cnpj já foi registrado!
+        for (PJ pj: pessoasJ){
+            if(pj.getRegistro().equals(registro))
+                throw new CNPJInvalido();
+        }
         if (registro.length() == 14 && registro.matches("[0-9]*")) {
             this.registro = registro;
         } else {
@@ -75,7 +79,7 @@ public class PJ extends Cliente {
         }
         return pf;
     }
-        public static void deletePJ(int id) {
+    public static void deletePJ(int id) {
         pessoasJ.remove(getPJ(id));
     }
 }
