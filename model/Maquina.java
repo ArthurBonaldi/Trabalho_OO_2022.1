@@ -37,12 +37,6 @@ public class Maquina {
 
     
     public void setNome(String nome) throws NomeInvalido{
-        //verifica se nome das maquinas são iguais
-        for (Maquina mq: maquinas){
-            if(mq.getNome().equals(nome)){
-                throw new NomeInvalido();
-            }
-        }
         String aux = nome;
         if (!aux.replaceAll(" ", "").toLowerCase().matches("[a-z]*") || aux.length() < 3) {
             throw new NomeInvalido();
