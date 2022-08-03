@@ -59,7 +59,6 @@ public class PF extends Cliente {
     }
 
     public void setDate(String date) throws DataInvalida {
-        int idade = 0;
         final LocalDate dataAtual = LocalDate.now();
 
         int anoatual = dataAtual.getYear();
@@ -72,7 +71,7 @@ public class PF extends Cliente {
 
         int totalIdade = 365 * anoatual + 30 * mesatual + diaatual - 365 * ano - 30 * mes - dia;
 
-        idade = totalIdade / 365;
+        int idade = totalIdade / 365;
 
         if (idade > 18) {
             this.date = date;
@@ -88,6 +87,13 @@ public class PF extends Cliente {
 
     @Override
     public void setRegistro(String registro) throws CPFInvalido {
+        // Percorre a lista e verifica se o cpf já está registrado!
+        for(PF pf: pessoasF){
+            if(pf.getRegistro().equals(registro)){
+                throw new CPFInvalido();
+            }
+        }
+
         if (registro.length() == 11 && registro.matches("[0-9]*")) {
              this.registro = registro;
         } else {
