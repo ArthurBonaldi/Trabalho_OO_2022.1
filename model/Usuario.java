@@ -76,6 +76,11 @@ public class Usuario  {
     }
     
     public void setEmail(String email) throws EmailInvalido{ //email deve conter @ e .com
+        for (Usuario u: usuarios){
+            if(u.getEmail().equals(email)){
+                throw new EmailInvalido();
+            }
+        }
         if(email.contains("@") && email.contains(".com")){
             this.email = email;
         } else{
@@ -103,7 +108,17 @@ public class Usuario  {
     }
 
     public void setCpf(String cpf) throws CPFInvalido{
-        this.cpf = cpf;
+        for(Usuario u: usuarios){
+            if(u.getCpf().equals(cpf)){
+                throw new CPFInvalido();
+            }
+        }
+
+        if (cpf.length() == 11 && cpf.matches("[0-9]*")) {
+            this.cpf = cpf;
+        } else {
+            throw new CPFInvalido();
+        }
     }
 
     public static void addUser(Usuario u){

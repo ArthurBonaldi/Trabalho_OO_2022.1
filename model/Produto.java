@@ -40,6 +40,13 @@ public class Produto {
     public String getNome() {return this.nome;}
 
     public void setNome(String nome) throws NomeInvalido{
+        //verifica se nome dos produtos são iguais
+        for (Produto pd: produtos){
+            if(pd.getNome().equals(nome)){
+                throw new NomeInvalido();
+            }
+        }
+
         String aux=nome;
         if (!aux.replaceAll(" ", "").toLowerCase().matches("[a-z]*") || nome.length() < 3) {
             throw new NomeInvalido();
