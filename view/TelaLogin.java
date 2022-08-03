@@ -43,41 +43,13 @@ public class TelaLogin extends JFrame {
         initComponents();
     }
 
-    private void exitButtonActionPerformed(ActionEvent evt) {
-        int input = JOptionPane.showConfirmDialog(null, "Saindo...", "Deseja mesmo sair?", JOptionPane.YES_NO_OPTION);
-        if(input ==0){
-            this.dispose();
-            System.exit(0);
-        }
-        else{
-            
-        }
+    public void montaTela() {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TelaLogin().setVisible(true);
+            }
+        });
     }
-    private void loginButtonActionPerformed(ActionEvent evt) {                                            
-        LoginController login = new LoginController();
-        if(login.logar(tfUser.getText(), (new String(tfPassword.getPassword())))){
-            Usuario user = Usuario.getLoggedUser();
-            if(user.getCargo().equals("Gerente")){
-                TelaHomeManager manager = new TelaHomeManager();
-                this.dispose();
-                manager.montaTela();
-            }
-            else if(user.getCargo().equals("Caixa")){
-                TelaHomeCashier cashier = new TelaHomeCashier();
-                this.dispose();
-                cashier.montaTela();
-            }
-            else if(user.getCargo().equals("Padeiro")){
-                TelaHomeBaker baker = new TelaHomeBaker();
-                this.dispose();
-                baker.montaTela();
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Usuário/Senha Inválida");
-        }
-        
-    }  
 
     public void initComponents() {
         jPanel1 = new JPanel();
@@ -108,7 +80,7 @@ public class TelaLogin extends JFrame {
         loginButton.setBackground(new Color(234, 220, 166));
         loginButton.setFont(new Font("Lucida Bright", 1, 12)); // NOI18N
         loginButton.setText("Entrar");
-         loginButton.addActionListener(new ActionListener() {
+        loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 loginButtonActionPerformed(evt);
             }
@@ -126,48 +98,48 @@ public class TelaLogin extends JFrame {
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(userLabel)
-                    .addComponent(passwordLabel))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(121, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(tfUser, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(exitButton)
-                                .addContainerGap())
-                            .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(subtitleLabel)
-                                .addGap(112, 112, 112)))
-                        .addComponent(tfPassword, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(loginButton)
-                        .addGap(157, 157, 157))))
+                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(userLabel)
+                                        .addComponent(passwordLabel))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(121, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                .addComponent(tfUser, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                                .addComponent(exitButton)
+                                                                .addContainerGap())
+                                                        .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                                .addComponent(subtitleLabel)
+                                                                .addGap(112, 112, 112)))
+                                                .addComponent(tfPassword, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(loginButton)
+                                                .addGap(157, 157, 157))))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(subtitleLabel, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(userLabel)
-                    .addComponent(tfUser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfPassword, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordLabel))
-                .addGap(18, 18, 18)
-                .addComponent(loginButton)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(exitButton)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(subtitleLabel, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(userLabel)
+                                        .addComponent(tfUser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(tfPassword, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(passwordLabel))
+                                .addGap(18, 18, 18)
+                                .addComponent(loginButton)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(exitButton)
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new Color(196, 105, 45));
@@ -178,44 +150,69 @@ public class TelaLogin extends JFrame {
         GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titleLabel)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(titleLabel)
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addComponent(titleLabel)
-                .addGap(19, 19, 19))
+                jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addContainerGap(23, Short.MAX_VALUE)
+                                .addComponent(titleLabel)
+                                .addGap(19, 19, 19))
         );
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }
 
-    public void montaTela() {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaLogin().setVisible(true);
+    private void exitButtonActionPerformed(ActionEvent evt) {
+        int input = JOptionPane.showConfirmDialog(null, "Saindo...", "Deseja mesmo sair?", JOptionPane.YES_NO_OPTION);
+        if (input == 0) {
+            this.dispose();
+            System.exit(0);
+        } else {
+
+        }
+    }
+
+    private void loginButtonActionPerformed(ActionEvent evt) {
+        LoginController login = new LoginController();
+        if (login.logar(tfUser.getText(), (new String(tfPassword.getPassword())))) {
+            Usuario user = Usuario.getLoggedUser();
+            if (user.getCargo().equals("Gerente")) {
+                TelaHomeManager manager = new TelaHomeManager();
+                this.dispose();
+                manager.montaTela();
+            } else if (user.getCargo().equals("Caixa")) {
+                TelaHomeCashier cashier = new TelaHomeCashier();
+                this.dispose();
+                cashier.montaTela();
+            } else if (user.getCargo().equals("Padeiro")) {
+                TelaHomeBaker baker = new TelaHomeBaker();
+                this.dispose();
+                baker.montaTela();
             }
-        });
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuário/Senha Inválida");
+        }
+
     }
 
 }

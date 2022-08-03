@@ -4,20 +4,29 @@
  */
 package ufjf.dcc025.trabalhooo.view;
 
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import ufjf.dcc025.trabalhooo.controller.ButtonFunction;
-import ufjf.dcc025.trabalhooo.controller.PFController;
 import ufjf.dcc025.trabalhooo.controller.PJController;
-import ufjf.dcc025.trabalhooo.model.PF;
 import ufjf.dcc025.trabalhooo.model.PJ;
+import ufjf.dcc025.trabalhooo.util.Arquivo;
+import ufjf.dcc025.trabalhooo.util.JsonPJ;
 
 /**
  *
@@ -25,21 +34,21 @@ import ufjf.dcc025.trabalhooo.model.PJ;
  */
 public class TelaCrudPJ extends JFrame implements ButtonFunction {
 
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private JButton jButton1;
+    private JButton jButton2;
+    private JButton jButton3;
+    private JButton jButton4;
+    private JButton jButton5;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JPanel jPanel1;
+    private JScrollPane jScrollPane1;
+    private JTable jTable1;
+    private JTextField jTextField1;
+    private JTextField jTextField2;
+    private JTextField jTextField3;
     private static List<PJ> pjs = new ArrayList<>();
 
     public TelaCrudPJ() {
@@ -48,77 +57,13 @@ public class TelaCrudPJ extends JFrame implements ButtonFunction {
     }
 
     public void montaTela() {
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaCrudPJ().setVisible(true);
             }
         });
     }
-
-    @Override
-    public void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        if (jTextField3.getText().length() == 14) {
-            PJController pj = new PJController();
-            PJ created = new PJ();
-            created = pj.create(jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.addRow(new Object[]{created.getId(), created.getNome(), created.getEmail(), created.getRegistro(), ""});
-        } else {
-            JOptionPane.showMessageDialog(null, "Formato de registro inválido");
-        }
-
-    }
-
-    @Override
-    public void editButtonActionPerformed(ActionEvent evt, int id) {
-        if (jTextField3.getText().length() == 14) {
-            PJController pj = new PJController();
-            PJ edited = new PJ();
-            edited = pj.update(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), id);
-            DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
-            tblmodel.setValueAt(edited.getNome(), jTable1.getSelectedRow(), 1);
-            tblmodel.setValueAt(edited.getEmail(), jTable1.getSelectedRow(), 2);
-            tblmodel.setValueAt(edited.getRegistro(), jTable1.getSelectedRow(), 3);
-        } else {
-            JOptionPane.showMessageDialog(null, "Formato de registro inválido");
-        }
-    }
-
-    @Override
-    public void deleteButtonActionPerformed(ActionEvent evt, int id) {
-        PJController pf = new PJController();
-        int option = JOptionPane.showConfirmDialog(null, "Excluindo Cliente PJ", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
-        if (option == 0) {
-            pf.delete(id);
-            DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
-            tblmodel.removeRow(jTable1.getSelectedRow());
-        }
-    }
-
-    @Override
-    public void resetButtonActionPerformed(ActionEvent evt) {
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-    }
-
-    @Override
-    public void backButtonActionPerformed(ActionEvent evt) {
-        TelaEscolheCliente cliente = new TelaEscolheCliente();
-        this.dispose();
-        cliente.montaTela();
-    }
-
-    private void jTable1MouseClicked(MouseEvent evt) {
-        DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
-        String tblname = tbl.getValueAt(jTable1.getSelectedRow(), 1).toString();
-        String tblEmail = tbl.getValueAt(jTable1.getSelectedRow(), 2).toString();
-        String tblReg = tbl.getValueAt(jTable1.getSelectedRow(), 3).toString();
-        jTextField1.setText(tblname);
-        jTextField2.setText(tblEmail);
-        jTextField3.setText(tblReg);
-    }
-
+    
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -141,7 +86,7 @@ public class TelaCrudPJ extends JFrame implements ButtonFunction {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(226, 194, 117));
+        jPanel1.setBackground(new Color(226, 194, 117));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -153,8 +98,8 @@ public class TelaCrudPJ extends JFrame implements ButtonFunction {
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.addRow(new Object[]{p.getId(), p.getNome(), p.getEmail(), p.getRegistro()});
         }
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jTable1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 jTable1MouseClicked(evt);
             }
         });
@@ -166,21 +111,21 @@ public class TelaCrudPJ extends JFrame implements ButtonFunction {
 
         jLabel3.setText("CNPJ");
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel4.setFont(new Font("SansSerif", 1, 12)); // NOI18N
         jLabel4.setText("Cadastro PJ");
 
-        jButton1.setBackground(new java.awt.Color(234, 220, 166));
+        jButton1.setBackground(new Color(234, 220, 166));
         jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 addButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(234, 220, 166));
+        jButton2.setBackground(new Color(234, 220, 166));
         jButton2.setText("Editar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
                 String idText = tbl.getValueAt(jTable1.getSelectedRow(), 0).toString();
                 int id = Integer.parseInt(idText);
@@ -188,10 +133,10 @@ public class TelaCrudPJ extends JFrame implements ButtonFunction {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(234, 220, 166));
+        jButton3.setBackground(new Color(234, 220, 166));
         jButton3.setText("Excluir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
                 String idText = tbl.getValueAt(jTable1.getSelectedRow(), 0).toString();
                 int id = Integer.parseInt(idText);
@@ -199,18 +144,18 @@ public class TelaCrudPJ extends JFrame implements ButtonFunction {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(234, 220, 166));
+        jButton4.setBackground(new Color(234, 220, 166));
         jButton4.setText("Resetar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 resetButtonActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(234, 220, 166));
+        jButton5.setBackground(new Color(234, 220, 166));
         jButton5.setText("Voltar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
@@ -302,5 +247,72 @@ public class TelaCrudPJ extends JFrame implements ButtonFunction {
 
         pack();
         this.setSize(790,400);
+    }
+    
+    
+     @Override
+    public void addButtonActionPerformed(ActionEvent evt) {
+        if (jTextField3.getText().length() == 14) {
+            PJController pj = new PJController();
+            PJ created = new PJ();
+            created = pj.create(jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.addRow(new Object[]{created.getId(), created.getNome(), created.getEmail(), created.getRegistro(), ""});
+        } else {
+            JOptionPane.showMessageDialog(null, "Formato de registro inválido");
+        }
+
+    }
+
+    @Override
+    public void editButtonActionPerformed(ActionEvent evt, int id) {
+        if (jTextField3.getText().length() == 14) {
+            PJController pj = new PJController();
+            PJ edited = new PJ();
+            edited = pj.update(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), id);
+            DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
+            tblmodel.setValueAt(edited.getNome(), jTable1.getSelectedRow(), 1);
+            tblmodel.setValueAt(edited.getEmail(), jTable1.getSelectedRow(), 2);
+            tblmodel.setValueAt(edited.getRegistro(), jTable1.getSelectedRow(), 3);
+        } else {
+            JOptionPane.showMessageDialog(null, "Formato de registro inválido");
+        }
+    }
+
+    @Override
+    public void deleteButtonActionPerformed(ActionEvent evt, int id) {
+        PJController pf = new PJController();
+        int option = JOptionPane.showConfirmDialog(null, "Excluindo Cliente PJ", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
+        if (option == 0) {
+            pf.delete(id);
+            DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
+            tblmodel.removeRow(jTable1.getSelectedRow());
+        }
+    }
+
+    @Override
+    public void resetButtonActionPerformed(ActionEvent evt) {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+    }
+
+    @Override
+    public void backButtonActionPerformed(ActionEvent evt) {
+        String arqUser = JsonPJ.toJSON(PJ.getPJs());
+        Arquivo.escreverArquivo("pjs.json", arqUser);
+        TelaEscolheCliente cliente = new TelaEscolheCliente();
+        this.dispose();
+        cliente.montaTela();
+    }
+
+    private void jTable1MouseClicked(MouseEvent evt) {
+        DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
+        String tblname = tbl.getValueAt(jTable1.getSelectedRow(), 1).toString();
+        String tblEmail = tbl.getValueAt(jTable1.getSelectedRow(), 2).toString();
+        String tblReg = tbl.getValueAt(jTable1.getSelectedRow(), 3).toString();
+        jTextField1.setText(tblname);
+        jTextField2.setText(tblEmail);
+        jTextField3.setText(tblReg);
     }
 }

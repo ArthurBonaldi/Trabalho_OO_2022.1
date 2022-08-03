@@ -26,9 +26,27 @@ public class PF extends Cliente {
     public PF() {
     }
 
+    public static int getCurrentId() {
+        return currentId;
+    }
+
+    public static void setCurrentId(int currentId) {
+        PF.currentId = currentId;
+    }
+    
+
     public static List<PF> getPFs() {
         return pessoasF;
     }
+
+    public static List<PF> getPessoasF() {
+        return pessoasF;
+    }
+
+    public static void setPessoasF(List<PF> pessoasF) {
+        PF.pessoasF = pessoasF;
+    }
+    
 
     public int getId() {
         return pessoaFId;

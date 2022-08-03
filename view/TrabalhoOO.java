@@ -4,9 +4,13 @@
  */
 package ufjf.dcc025.trabalhooo.view;
 
-import com.google.gson.Gson;
-import ufjf.dcc025.trabalhooo.controller.UsuarioController;
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import ufjf.dcc025.trabalhooo.model.Usuario;
+import ufjf.dcc025.trabalhooo.util.Arquivo;
+import ufjf.dcc025.trabalhooo.util.JsonUsuario;
 
 /**
  *
@@ -14,11 +18,15 @@ import ufjf.dcc025.trabalhooo.model.Usuario;
  */
 public class TrabalhoOO {
 
-    public static void main(String args[]) {
-        UsuarioController add = new UsuarioController();
-        Usuario user = new Usuario();
-        user = add.create("Arthur", "arthur.bonaldi@codejr.com.br", "123456789", "Gerente");       
-        
+    public static void main(String args[]) throws FileNotFoundException {
+        String userJson;
+        int size;
+        List<Usuario> usuarios = new ArrayList<>();
+        userJson = Arquivo.leArquivo("funcionarios.json");
+        usuarios = JsonUsuario.toUsuarios(userJson);
+        Usuario.setUsuarios(usuarios);
+        size = usuarios.size();
+        Usuario.setCurrentId(Usuario.getCurrentId()+size);
         
         TelaLogin login = new TelaLogin();
         login.montaTela();

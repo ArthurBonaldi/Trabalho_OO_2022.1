@@ -9,13 +9,12 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,6 +29,8 @@ import ufjf.dcc025.trabalhooo.controller.ProdutoController;
 import ufjf.dcc025.trabalhooo.controller.ButtonFunction;
 import ufjf.dcc025.trabalhooo.model.Usuario;
 import ufjf.dcc025.trabalhooo.model.Produto;
+import ufjf.dcc025.trabalhooo.util.Arquivo;
+import ufjf.dcc025.trabalhooo.util.JsonProduto;
 
 /**
  *
@@ -58,62 +59,6 @@ public class TelacCrudProduto extends JFrame implements ButtonFunction {
         initComponents();
         produto = Produto.getProdutos();
     }
-    private void jTable1MouseClicked(MouseEvent evt){
-       DefaultTableModel tbl = (DefaultTableModel)jTable1.getModel();
-       String tblname = tbl.getValueAt(jTable1.getSelectedRow(),1).toString();
-       String tblprice = tbl.getValueAt(jTable1.getSelectedRow(),3 ).toString();
-       String tblqtd = tbl.getValueAt(jTable1.getSelectedRow(), 2).toString();
-       
-       tfName.setText(tblname);
-       tfPrice.setText(tblprice);
-       tfQuant.setText(tblqtd);
-       
-       
-    }
-
-
-    @Override
-    public void editButtonActionPerformed(java.awt.event.ActionEvent evt, int id) {
-        DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
-        ProdutoController edit  = new ProdutoController();
-        Produto editado;
-        editado = edit.update(tfName.getText(), tfQuant.getText(), tfPrice.getText(), id);
-        
-        tblmodel.setValueAt(editado.getNome(),jTable1.getSelectedRow() , 1);
-        tblmodel.setValueAt(editado.getQuantidade(), jTable1.getSelectedRow(), 2);
-        tblmodel.setValueAt(editado.getPreco(), jTable1.getSelectedRow(), 3);
-        
-    }
-    @Override
-    public void deleteButtonActionPerformed(java.awt.event.ActionEvent evt, int id) {
-        ProdutoController produto = new ProdutoController();
-        int option = JOptionPane.showConfirmDialog(null,"Excluindo Produto", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
-        if(option == 0){
-        produto.delete(id);
-        DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
-        tblmodel.removeRow(jTable1.getSelectedRow());
-        }
-        else{
-            
-        }
-        
-    }
-
-    @Override
-    public void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ProdutoController prod = new ProdutoController();
-        Produto created;
-        created = prod.create(tfName.getText(), tfQuant.getText(), tfPrice.getText());
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.addRow(new Object[]{created.getId(), created.getNome(), created.getQuantidade(), created.getPreco()});
-        
-    }
-
-    public void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        tfName.setText("");
-        tfPrice.setText("");
-        tfQuant.setText("");
-    }
 
     public void montaTela() {
         EventQueue.invokeLater(new Runnable() {
@@ -121,25 +66,6 @@ public class TelacCrudProduto extends JFrame implements ButtonFunction {
                 new TelacCrudProduto().setVisible(true);
             }
         });
-    }
-
-    @Override
-    public void backButtonActionPerformed(ActionEvent evt) {
-        Usuario user = Usuario.getLoggedUser();
-        if (user.getCargo().equals("Padeiro")) {
-            TelaHomeBaker baker = new TelaHomeBaker();
-            this.dispose();
-            baker.montaTela();
-
-        } else if (user.getCargo().equals("Gerente")) {
-            TelaHomeManager manager = new TelaHomeManager();
-            this.dispose();
-            manager.montaTela();
-        } else {
-            TelaHomeCashier cashier = new TelaHomeCashier();
-            this.dispose();
-            cashier.montaTela();
-        }
     }
 
     private void initComponents() {
@@ -172,8 +98,8 @@ public class TelacCrudProduto extends JFrame implements ButtonFunction {
                     "Id", "Nome", "Quantidade", "Preço"
                 }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jTable1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 jTable1MouseClicked(evt);
             }
         });
@@ -208,9 +134,9 @@ public class TelacCrudProduto extends JFrame implements ButtonFunction {
         editButton.setText("Editar");
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                DefaultTableModel tbl = (DefaultTableModel)jTable1.getModel();
-                String idText =tbl. getValueAt(jTable1.getSelectedRow(), 0).toString();
-                int id  = Integer.parseInt(idText);
+                DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
+                String idText = tbl.getValueAt(jTable1.getSelectedRow(), 0).toString();
+                int id = Integer.parseInt(idText);
                 editButtonActionPerformed(evt, id);
             }
         });
@@ -220,9 +146,9 @@ public class TelacCrudProduto extends JFrame implements ButtonFunction {
         deleteButton.setText("Excluir");
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-               DefaultTableModel tbl = (DefaultTableModel)jTable1.getModel();
-                String idText =tbl. getValueAt(jTable1.getSelectedRow(), 0).toString();
-                int id  = Integer.parseInt(idText);
+                DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
+                String idText = tbl.getValueAt(jTable1.getSelectedRow(), 0).toString();
+                int id = Integer.parseInt(idText);
                 deleteButtonActionPerformed(evt, id);
             }
         });
@@ -230,8 +156,8 @@ public class TelacCrudProduto extends JFrame implements ButtonFunction {
         resetButton.setBackground(new Color(234, 220, 166));
         resetButton.setFont(new Font("Lucida Bright", 1, 12)); // NOI18N
         resetButton.setText("Resetar");
-        resetButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        resetButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 resetButtonActionPerformed(evt);
             }
         });
@@ -239,8 +165,8 @@ public class TelacCrudProduto extends JFrame implements ButtonFunction {
         backButton.setBackground(new Color(234, 220, 166));
         backButton.setFont(new Font("Lucida Bright", 1, 12)); // NOI18N
         backButton.setText("Voltar");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
@@ -331,5 +257,80 @@ public class TelacCrudProduto extends JFrame implements ButtonFunction {
         );
 
         pack();
-    }// </editor-fold>         
+    }
+
+    private void jTable1MouseClicked(MouseEvent evt) {
+        DefaultTableModel tbl = (DefaultTableModel) jTable1.getModel();
+        String tblname = tbl.getValueAt(jTable1.getSelectedRow(), 1).toString();
+        String tblprice = tbl.getValueAt(jTable1.getSelectedRow(), 3).toString();
+        String tblqtd = tbl.getValueAt(jTable1.getSelectedRow(), 2).toString();
+
+        tfName.setText(tblname);
+        tfPrice.setText(tblprice);
+        tfQuant.setText(tblqtd);
+    }
+
+    @Override
+    public void editButtonActionPerformed(ActionEvent evt, int id) {
+        DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
+        ProdutoController edit = new ProdutoController();
+        Produto editado;
+        editado = edit.update(tfName.getText(), tfQuant.getText(), tfPrice.getText(), id);
+
+        tblmodel.setValueAt(editado.getNome(), jTable1.getSelectedRow(), 1);
+        tblmodel.setValueAt(editado.getQuantidade(), jTable1.getSelectedRow(), 2);
+        tblmodel.setValueAt(editado.getPreco(), jTable1.getSelectedRow(), 3);
+
+    }
+
+    @Override
+    public void deleteButtonActionPerformed(ActionEvent evt, int id) {
+        ProdutoController produto = new ProdutoController();
+        int option = JOptionPane.showConfirmDialog(null, "Excluindo Produto", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
+        if (option == 0) {
+            produto.delete(id);
+            DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
+            tblmodel.removeRow(jTable1.getSelectedRow());
+        } else {
+
+        }
+
+    }
+
+    @Override
+    public void addButtonActionPerformed(ActionEvent evt) {
+        ProdutoController prod = new ProdutoController();
+        Produto created;
+        created = prod.create(tfName.getText(), tfQuant.getText(), tfPrice.getText());
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.addRow(new Object[]{created.getId(), created.getNome(), created.getQuantidade(), created.getPreco()});
+
+    }
+
+    public void resetButtonActionPerformed(ActionEvent evt) {
+        tfName.setText("");
+        tfPrice.setText("");
+        tfQuant.setText("");
+    }
+
+    @Override
+    public void backButtonActionPerformed(ActionEvent evt) {
+        String arqUser = JsonProduto.toJSON(Produto.getProdutos());
+        Arquivo.escreverArquivo("produtos.json", arqUser);
+        Usuario user = Usuario.getLoggedUser();
+        if (user.getCargo().equals("Padeiro")) {
+            TelaHomeBaker baker = new TelaHomeBaker();
+            this.dispose();
+            baker.montaTela();
+
+        } else if (user.getCargo().equals("Gerente")) {
+            TelaHomeManager manager = new TelaHomeManager();
+            this.dispose();
+            manager.montaTela();
+        } else {
+            TelaHomeCashier cashier = new TelaHomeCashier();
+            this.dispose();
+            cashier.montaTela();
+        }
+    }
 }

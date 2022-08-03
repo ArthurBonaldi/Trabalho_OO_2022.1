@@ -9,35 +9,35 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import ufjf.dcc025.trabalhooo.model.Maquina;
+import ufjf.dcc025.trabalhooo.model.PJ;
 
 /**
  *
  * @author arthu
  */
-public class JsonMaquina {
-    public static String toJSON(Maquina maquina) {
+public class JsonPJ {
+    public static String toJSON(PJ pj) {
         Gson gson = new Gson();
-        String json = gson.toJson(maquina);
+        String json = gson.toJson(pj);
         return json;
     }
-     public static String toJSON(List<Maquina> maquinas) {
+     public static String toJSON(List<PJ> pjs) {
         Gson gson = new Gson();
-        String json = gson.toJson(maquinas);
+        String json = gson.toJson(pjs);
         return json;
     }
-     public static Maquina toMaquina(String conteudo) {
+     public static PJ toPJ(String conteudo) {
         Gson gson = new Gson();
-        Maquina maquina = gson.fromJson(conteudo, Maquina.class);
+        PJ pj = gson.fromJson(conteudo, PJ.class);
 
-        return maquina;
+        return pj;
     }
-    public static List<Maquina> toMaquinas(String conteudo) {
+    public static List<PJ> toPJs(String conteudo) {
         Gson gson = new Gson();
-        Type maquina = new TypeToken<ArrayList<Maquina>>() {
+        Type pj = new TypeToken<ArrayList<PJ>>() {
         }.getType();
-        List<Maquina> maquinas = gson.fromJson(conteudo, maquina);
+        List<PJ> pjs = gson.fromJson(conteudo, pj);
 
-        return maquinas;
+        return pjs;
     }
 }

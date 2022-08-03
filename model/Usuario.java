@@ -35,6 +35,14 @@ public class Usuario  {
         return senha;
     }
 
+    public static int getCurrentId() {
+        return currentId;
+    }
+
+    public static void setCurrentId(int currentId) {
+        Usuario.currentId = currentId;
+    }
+    
     public void setSenha(String senha) throws SenhaInvalida{
        if(senha.length() >= 6 && senha.length() <= 12 ){
            this.senha = senha;
@@ -83,6 +91,9 @@ public class Usuario  {
 
     public static List<Usuario> getUsuarios(){
         return usuarios;
+    }
+    public static void setUsuarios(List<Usuario> users){
+        usuarios = users;
     }
 
     public String getCpf() {

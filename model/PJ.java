@@ -21,6 +21,23 @@ public class PJ extends Cliente {
     public PJ() {
     }
 
+    public static List<PJ> getPessoasJ() {
+        return pessoasJ;
+    }
+
+    public static void setPessoasJ(List<PJ> pessoasJ) {
+        PJ.pessoasJ = pessoasJ;
+    }
+
+    public static int getCurrentId() {
+        return currentId;
+    }
+
+    public static void setCurrentId(int currentId) {
+        PJ.currentId = currentId;
+    }
+    
+
     public static List<PJ> getPJs() {
         return pessoasJ;
     }

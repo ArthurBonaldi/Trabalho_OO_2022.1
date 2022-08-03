@@ -16,6 +16,19 @@ public class Produto {
         return produtos;
     }
 
+    public static void setProdutos(List<Produto> produtos) {
+        Produto.produtos = produtos;
+    }
+
+    public static int getCurrentId() {
+        return currentId;
+    }
+
+    public static void setCurrentId(int currentId) {
+        Produto.currentId = currentId;
+    }
+    
+
     
 
     public String getNome() {return this.nome;}

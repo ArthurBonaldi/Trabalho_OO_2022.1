@@ -6,10 +6,10 @@ package ufjf.dcc025.trabalhooo.util;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import ufjf.dcc025.trabalhooo.model.Produto;
-
 
 /**
  *
@@ -36,7 +36,7 @@ public class JsonProduto {
         Gson gson = new Gson();
         Type produto = new TypeToken<ArrayList<Produto>>() {
         }.getType();
-        List<Produto> produtos = gson.fromJson(conteudo, produtos);
+        List<Produto> produtos = gson.fromJson(conteudo, produto);
 
         return produtos;
     }

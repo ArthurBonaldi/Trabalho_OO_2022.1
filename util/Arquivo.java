@@ -3,32 +3,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ufjf.dcc025.trabalhooo.util;
+
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
 /**
  *
  * @author arthu
  */
 public class Arquivo {
-    public static String leArquivo(String caminho) throws FileNotFoundException{
+
+    public static String leArquivo(String caminho) throws FileNotFoundException {
+        String local = "\\src\\main\\java\\ufjf\\dcc025\\trabalhooo\\arquivos";
         StringBuilder conteudo = new StringBuilder();
-        File arquivo = new File(caminho);
+        File diretorio = new File(System.getProperty("user.dir"));
+        File arquivo = new File(diretorio + local +"\\" + caminho);
         Scanner leitor = new Scanner(arquivo);
-        
-         while (leitor.hasNextLine()) {
+
+        while (leitor.hasNextLine()) {
             conteudo.append(leitor.nextLine()).append("\n");
         }
-         return conteudo.toString();
+        return conteudo.toString();
     }
+
     public static void escreverArquivo(String caminho, String conteudo) {
         FileWriter fwArquivo;
         BufferedWriter bwArquivo;
+        String local = "\\src\\main\\java\\ufjf\\dcc025\\trabalhooo\\arquivos";
         try {
-            File arquivo = new File(caminho);
+            File diretorio = new File(System.getProperty("user.dir"));
+            File arquivo = new File(diretorio + local, caminho);
 
             //Se o arquivo já existir, então abrir para concatenação, caso contrário criar novo arquivo
             fwArquivo = new FileWriter(arquivo, false);
@@ -46,5 +54,4 @@ public class Arquivo {
         }
     }
 
-    
 }

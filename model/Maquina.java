@@ -16,6 +16,19 @@ public class Maquina {
         return this.nome;
     }
 
+    public static int getCurrentId() {
+        return currentId;
+    }
+
+    public static void setCurrentId(int currentId) {
+        Maquina.currentId = currentId;
+    }
+
+    public static void setMaquinas(List<Maquina> maquinas) {
+        Maquina.maquinas = maquinas;
+    }
+
+    
     public void setNome(String nome) throws NomeInvalido{
         String aux = nome;
         if (!aux.replaceAll(" ", "").toLowerCase().matches("[a-z]*") || aux.length() < 3) {
