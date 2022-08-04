@@ -284,7 +284,7 @@ public class TelaCrudMaquina extends JFrame implements FormatDate, ButtonFunctio
     @Override
     public void deleteButtonActionPerformed(ActionEvent evt, int id) {
         MaquinaController maquina = new MaquinaController();
-        int option = JOptionPane.showConfirmDialog(null, "Excluindo Produto", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, "Excluindo Maquina", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
         if (option == 0) {
             maquina.delete(id);
             DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();

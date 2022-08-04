@@ -293,8 +293,10 @@ public class TelaCrudPF extends JFrame implements FormatDate, ButtonFunction {
             strDate = formataData(strDate);
             PFController pf = new PFController();
             PF edited = new PF();
+          
             edited = pf.update(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), strDate, id);
             DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
+            
             tblmodel.setValueAt(edited.getNome(), jTable1.getSelectedRow(), 1);
             tblmodel.setValueAt(edited.getEmail(), jTable1.getSelectedRow(), 2);
             tblmodel.setValueAt(edited.getRegistro(), jTable1.getSelectedRow(), 3);
@@ -307,7 +309,7 @@ public class TelaCrudPF extends JFrame implements FormatDate, ButtonFunction {
     @Override
     public void deleteButtonActionPerformed(ActionEvent evt, int id) {
         PFController pf = new PFController();
-        int option = JOptionPane.showConfirmDialog(null, "Excluindo Produto", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, "Excluindo Cliente PF", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
         if (option == 0) {
             pf.delete(id);
             DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();

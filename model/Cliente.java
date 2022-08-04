@@ -58,6 +58,24 @@ public abstract class Cliente  {
         else
             this.email = email;
     }
+        public void setEmail(String email, int id) throws EmailInvalido{
+        //verifica se o emial do cliente já foi registrado!
+        for(PF pf: PF.getPFs()){
+            if(pf.getEmail().equals(email) && !(pf.getId()==id)){
+                throw new EmailInvalido();
+            }
+        }
+        for(PJ pj: PJ.getPJs()){
+            if(pj.getEmail().equals(email) && !(pj.getId()==id)){
+                throw new EmailInvalido();
+            }
+        }
+
+        if(!email.contains("@") || !email.contains(".com"))
+            throw new EmailInvalido();
+        else
+            this.email = email;
+    }
     
     public abstract String getRegistro();
 

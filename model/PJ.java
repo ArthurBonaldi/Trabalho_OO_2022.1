@@ -88,6 +88,18 @@ public class PJ extends Cliente {
             throw new CNPJInvalido();
         }
     }
+    public void setRegistro(String registro, int id) throws CNPJInvalido {
+        //Verifica se cnpj já foi registrado!
+        for (PJ pj: pessoasJ){
+            if(pj.getRegistro().equals(registro) && !(pj.getId()==id))
+                throw new CNPJInvalido();
+        }
+        if (registro.length() == 14 && registro.matches("[0-9]*")) {
+            this.registro = registro;
+        } else {
+            throw new CNPJInvalido();
+        }
+    }
 
     public static PJ getPJ(int id) {
         PJ pf = new PJ();

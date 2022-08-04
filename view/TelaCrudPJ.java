@@ -269,6 +269,7 @@ public class TelaCrudPJ extends JFrame implements ButtonFunction {
     @Override
     public void editButtonActionPerformed(ActionEvent evt, int id) {
         if (jTextField3.getText().length() == 14) {
+            
             PJController pj = new PJController();
             PJ edited = new PJ();
             edited = pj.update(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), id);

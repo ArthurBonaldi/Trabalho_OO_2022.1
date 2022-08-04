@@ -120,6 +120,20 @@ public class PF extends Cliente {
             throw new CPFInvalido();
         }
     }
+        public void setRegistro(String registro, int id) throws CPFInvalido {
+        // Percorre a lista e verifica se o cpf já está registrado!
+        for(PF pf: pessoasF){
+            if(pf.getRegistro().equals(registro) && !(pf.getId()==id)){
+                throw new CPFInvalido();
+            }
+        }
+
+        if (registro.length() == 11 && registro.matches("[0-9]*")) {
+             this.registro = registro;
+        } else {
+            throw new CPFInvalido();
+        }
+    }
 
     public static PF getPF(int id) {
         PF pf = new PF();

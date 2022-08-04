@@ -63,7 +63,6 @@ public class TelaCrudFuncionarios extends JFrame implements ButtonFunction {
         initComponents();
     }
 
-   
     public void montaTela() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -280,11 +279,12 @@ public class TelaCrudFuncionarios extends JFrame implements ButtonFunction {
 
         pack();
     }
-     @Override
+
+    @Override
     public void backButtonActionPerformed(ActionEvent evt) {
         String arqUser = JsonUsuario.toJSON(Usuario.getUsuarios());
         Arquivo.escreverArquivo("funcionarios.json", arqUser);
-        
+
         Usuario user = Usuario.getLoggedUser();
         if (user.getCargo().equals("Padeiro")) {
             TelaHomeBaker baker = new TelaHomeBaker();
@@ -324,7 +324,7 @@ public class TelaCrudFuncionarios extends JFrame implements ButtonFunction {
     @Override
     public void deleteButtonActionPerformed(ActionEvent evt, int id) {
         UsuarioController produto = new UsuarioController();
-        int option = JOptionPane.showConfirmDialog(null, "Excluindo Produto", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, "Excluindo Funcionário", "Confirmar Exclusão?", JOptionPane.YES_NO_OPTION);
         if (option == 0) {
             produto.delete(id);
             DefaultTableModel tblmodel = (DefaultTableModel) jTable1.getModel();
@@ -349,8 +349,11 @@ public class TelaCrudFuncionarios extends JFrame implements ButtonFunction {
         UsuarioController user = new UsuarioController();
         Usuario created;
         created = user.create(tfName.getText(), tfEmail.getText(), tfPassword.getText(), jComboBox1.getSelectedItem().toString());
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(new Object[]{created.getId(), created.getNome(), created.getEmail(), created.getCargo()});
+        if (created != null) {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.addRow(new Object[]{created.getId(), created.getNome(), created.getEmail(), created.getCargo()});
+
+        }
 
     }
 

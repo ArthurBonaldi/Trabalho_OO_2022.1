@@ -13,8 +13,9 @@ import java.util.List;
  * @author Joel Henrique Nunes de Oliveira Silva - 202076030
  * @author Miguel Sales de Almeida Lopes - 202076024
  */
-public class Usuario  {
-    private static int currentId = 1; 
+public class Usuario {
+
+    private static int currentId = 1;
     private int userId;
     private String nome;
     private String cpf;
@@ -24,14 +25,14 @@ public class Usuario  {
 
     private static List<Usuario> usuarios = new ArrayList<>();
     private static Usuario loggedUser;
-   
 
-    public Usuario(){
-      
+    public Usuario() {
+
     }
+
     public int getId() {
         return userId;
-    } 
+    }
 
     public String getSenha() {
         return senha;
@@ -44,51 +45,63 @@ public class Usuario  {
     public static void setCurrentId(int currentId) {
         Usuario.currentId = currentId;
     }
-    
-    public void setSenha(String senha) throws SenhaInvalida{
-       if(senha.length() >= 6 && senha.length() <= 12 ){
-           this.senha = senha;
-       }
-       else{
-           throw new SenhaInvalida();
-       }
+
+    public void setSenha(String senha) throws SenhaInvalida {
+        if (senha.length() >= 6 && senha.length() <= 12) {
+            this.senha = senha;
+        } else {
+            throw new SenhaInvalida();
+        }
     }
-   
-    public void setId(int id){
+
+    public void setId(int id) {
         this.userId = id;
     }
-    
-    public String getNome(){
+
+    public String getNome() {
         return this.nome;
     }
 
-    public void setNome(String nome) throws NomeInvalido{ //não pode conter numeros e tem q ser maior q 2
-        String aux=nome;
-        if (!aux.replaceAll(" ", "").toLowerCase().matches("[a-z]*")  || nome.length() < 3) {
+    public void setNome(String nome) throws NomeInvalido { //não pode conter numeros e tem q ser maior q 2
+        String aux = nome;
+        if (!aux.replaceAll(" ", "").toLowerCase().matches("[a-z]*") || nome.length() < 3) {
             throw new NomeInvalido();
-        }
-        else
+        } else {
             this.nome = nome;
+        }
     }
-    
-    public String getEmail(){
+
+    public String getEmail() {
         return this.email;
     }
-    
-    public void setEmail(String email) throws EmailInvalido{ //email deve conter @ e .com
-        for (Usuario u: usuarios){
-            if(u.getEmail().equals(email)){
+
+    public void setEmail(String email) throws EmailInvalido { //email deve conter @ e .com
+        for (Usuario u : usuarios) {
+            if (u.getEmail().equals(email)) {
                 throw new EmailInvalido();
             }
         }
-        if(email.contains("@") && email.contains(".com")){
+        if (email.contains("@") && email.contains(".com")) {
             this.email = email;
-        } else{
+        } else {
             throw new EmailInvalido();
         }
     }
-    
-     public String getCargo() {
+
+    public void setEmail(String email, int id) throws EmailInvalido { //email deve conter @ e .com
+        for (Usuario u : usuarios) {
+            if (u.getEmail().equals(email) && !(u.getId()==id)) {
+                throw new EmailInvalido();
+            }
+        }
+        if (email.contains("@") && email.contains(".com")) {
+            this.email = email;
+        } else {
+            throw new EmailInvalido();
+        }
+    }
+
+    public String getCargo() {
         return cargo;
     }
 
@@ -96,10 +109,11 @@ public class Usuario  {
         this.cargo = cargo;
     } //pra arrumar
 
-    public static List<Usuario> getUsuarios(){
+    public static List<Usuario> getUsuarios() {
         return usuarios;
     }
-    public static void setUsuarios(List<Usuario> users){
+
+    public static void setUsuarios(List<Usuario> users) {
         usuarios = users;
     }
 
@@ -107,9 +121,9 @@ public class Usuario  {
         return this.cpf;
     }
 
-    public void setCpf(String cpf) throws CPFInvalido{
-        for(Usuario u: usuarios){
-            if(u.getCpf().equals(cpf)){
+    public void setCpf(String cpf) throws CPFInvalido {
+        for (Usuario u : usuarios) {
+            if (u.getCpf().equals(cpf)) {
                 throw new CPFInvalido();
             }
         }
@@ -121,16 +135,16 @@ public class Usuario  {
         }
     }
 
-    public static void addUser(Usuario u){
+    public static void addUser(Usuario u) {
         u.setId(currentId);
         usuarios.add(u);
         currentId++;
     }
-    
-    public static Usuario getUser(int id){
+
+    public static Usuario getUser(int id) {
         Usuario usuario = new Usuario();
-        for(Usuario u: usuarios){
-            if(u.getId() == id){
+        for (Usuario u : usuarios) {
+            if (u.getId() == id) {
                 usuario = u;
             }
         }
@@ -138,17 +152,19 @@ public class Usuario  {
         return usuario;
     }
 
-    public static void deleteUser(int id){
+    public static void deleteUser(int id) {
         usuarios.remove(getUser(id));
     }
 
-    public static void setLoggedUser(Usuario u){
+    public static void setLoggedUser(Usuario u) {
         loggedUser = u;
     }
-    public static Usuario getLoggedUser(){
+
+    public static Usuario getLoggedUser() {
         return loggedUser;
     }
-    public static void addList(Usuario u){
+
+    public static void addList(Usuario u) {
         usuarios.add(u);
     }
 }

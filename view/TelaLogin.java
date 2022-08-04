@@ -212,7 +212,7 @@ public class TelaLogin extends JFrame {
                 baker.montaTela();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Usuário/Senha Inválida");
+            JOptionPane.showMessageDialog(null, "Usuário/Senha Inválida", "Falha ao logar", JOptionPane.ERROR_MESSAGE);
         }
 
     }
